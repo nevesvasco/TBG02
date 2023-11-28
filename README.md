@@ -17,7 +17,7 @@ Este projeto foi desenvolvido por Betânia dos Santos (a042807@umaia.pt), Daniel
 https://paste.pics/75b8f8b805c50e57fc9b53db6420d7c3
 
 - **Salto e duplo salto** O personagem vai poder dar um salto e um duplo salto para passar obstáculos normais e mais altos que lhe apareçam pelo caminho.
-- **Apanhar boosts** o personagem vai apanhar boosts que permite diminuir a velocidade do personagem durante um certo período de tempo para ficar mais fácil de ultrapassar os obstáculos.
+- **Usar boosts** o personagem vai apanhar boosts que permite usar e diminuir a velocidade do personagem durante um certo período de tempo para ficar mais fácil de ultrapassar os obstáculos.
 
 ### PLANNED FEATURES
 
