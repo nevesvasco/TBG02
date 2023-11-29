@@ -1,8 +1,14 @@
+### TBG02 ###
 .gradle
 build/
 !TBG02/gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
+!TBG02/build.gradle
+!TBG02/gradle/
+!TBG02/gradlew
+!TBG02/gradlew.bat
+!TBG02/settings.gradle
 
 ### IntelliJ IDEA ###
 .idea
