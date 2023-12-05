@@ -7,7 +7,7 @@ Há medida que a figura vai avançando, vai ganhando pontos num score que aparec
 O jogo vai estar dividido por níveis, e há medida que se vai passando os níveis, mais difícil o jogo se torna.
 O nível também vai-se tornando mais difícil enquanto o personagem mais avança. Vai aparecendo cada vez mais obstáculos e o ritmo da música vai ficando mais rápido.
 
-Este projeto foi desenvolvido por Betânia dos Santos (a042807@umaia.pt), Daniel Nunes e Vasco Neves (a043335@umaia.pt) para a cadeira de POO 2023/2024.
+Este projeto foi desenvolvido por Betânia dos Santos (a042807@umaia.pt), Daniel Nunes (a042051@umaia.pt) e Vasco Neves (a043335@umaia.pt) para a cadeira de POO 2023/2024.
 
 ## Features Planeadas e Implementadas
 
