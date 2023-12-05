@@ -23,7 +23,6 @@ https://paste.pics/75b8f8b805c50e57fc9b53db6420d7c3
 
 > This section is similar to the previous one but should list the features that are not yet implemented. Instead of screenshots you should include GUI mock-ups for the planned features.
 
-[### DESIGN](https://paste.pics/75b8f8b805c50e57fc9b53db6420d7c3)
 
 > This section should be organized in different subsections, each describing a different design problem that you had to solve during the project. Each subsection should be organized in four different parts:
 
