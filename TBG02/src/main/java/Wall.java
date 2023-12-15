@@ -7,9 +7,12 @@ import java.util.Collections;
 
 public class Wall extends Element {
 
+    private static final int SPEED = 3;  // Velocidade de movimento
+
     public Wall(int x, int y) {
         super(x, y);
     }
+
     @Override
     public void draw(TextGraphics graphics, Screen screen) {
 
@@ -17,22 +20,19 @@ public class Wall extends Element {
         TextCharacter wallBackground = new TextCharacter(' ', TextColor.Factory.fromString("#999999"), TextColor.ANSI.DEFAULT);
         TextCharacter boldCharacter = new TextCharacter('#', TextColor.ANSI.DEFAULT, TextColor.ANSI.DEFAULT);
         boldCharacter = boldCharacter.withModifiers(Collections.singleton(SGR.BOLD));
+
         int x = position.getX();
         int y = position.getY();
 
-        int x2 = x * 2;
-        int y2 = y * 2;
+        // Draw horizontal walls only
+        graphics.setCharacter(x * 2, y * 0, wallCharacter);
+        graphics.setCharacter(x * 2 + 1, y * 0, wallBackground);
 
-        screen.setCharacter(x, y, wallCharacter);
-        graphics.setCharacter(x2, y2, wallBackground);
-        graphics.setCharacter(x2 + 1, y2, wallBackground);
-        graphics.setCharacter(x2, y2 + 1, wallBackground);
-        graphics.setCharacter(x2 + 1, y2 + 1, wallBackground);
+        graphics.setCharacter(x * 2, y * 0, boldCharacter);
+        graphics.setCharacter(x * 2 + 1, y * 0, boldCharacter);
 
-        screen.setCharacter(x, y, boldCharacter);
-        graphics.setCharacter(x2 + 1, y2, boldCharacter);
-        graphics.setCharacter(x2, y2 + 1, boldCharacter);
-        graphics.setCharacter(x2 + 1, y2 + 1, boldCharacter);
+        // Move a parede para a esquerda com a velocidade especificada
+        position.setX((position.getX() - SPEED + screen.getTerminalSize().getColumns()) % screen.getTerminalSize().getColumns());
     }
 
     public Position getPosition() {
