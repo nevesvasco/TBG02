@@ -12,7 +12,9 @@ Este projeto foi desenvolvido por Betânia dos Santos (a042807@umaia.pt), Daniel
 ## Como se joga
 
 Space Bar - Saltar
+
 Escape - Menu
+
 V - Boost
 
 ##Docks##
