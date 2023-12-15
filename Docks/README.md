@@ -34,19 +34,15 @@ Até este ponto ainda nenhum code smells foi detetado.
 
 ## TESTING
 
-Arena - 
+Arena
 
-Game - 
+Game
 
-Player - 
+Player
 
-Wall - 
+Wall 
 
-Element - 
-
-Position - 
-
-Application - 
+Position 
 
 ## Auto Avaliação
 
