@@ -34,7 +34,9 @@ public class Wall extends Element {
         // Move a parede para a esquerda com a velocidade especificada
         position.setX((position.getX() - SPEED + screen.getTerminalSize().getColumns()) % screen.getTerminalSize().getColumns());
     }
-
+    public void moveLeft(int speed) {
+        position.setX( position.getX() - speed);  // Move a parede para a esquerda com base na velocidade
+    }
     public Position getPosition() {
         return position;
     }

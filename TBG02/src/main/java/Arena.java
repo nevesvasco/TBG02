@@ -1,6 +1,4 @@
-import com.googlecode.lanterna.TerminalPosition;
-import com.googlecode.lanterna.TerminalSize;
-import com.googlecode.lanterna.TextColor;
+import com.googlecode.lanterna.*;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
@@ -44,12 +42,16 @@ public class Arena {
     }
 
     private List<Wall> walls = new ArrayList<Wall>();
+    private List<Obstacle> obstacles;
+    private Random random;
 
     public Arena(int width, int height) {
         player = new Player(graphics,10,10, 16,9, Color.black);
         this.width = width;
         this.height = height;
         this.walls = createWalls();
+        this.obstacles = new ArrayList<>();
+        this.random = new Random();
     }
 
     public void processKey(KeyStroke key, Screen screen) throws IOException {
@@ -89,7 +91,28 @@ public class Arena {
         gameOver = true;
     }
 
-    public void draw(TextGraphics textGraphics, Screen screen) throws IOException {
+    public void addObstacle() {
+        int x = random.nextInt(width);
+        int y = 0;
+        Obstacle obstacle = new Obstacle(x, y);
+        obstacles.add(obstacle);
+    }
+
+    public void updateObstacles() {
+        Iterator<Obstacle> iterator = obstacles.iterator();
+        while (iterator.hasNext()) {
+            Obstacle obstacle = iterator.next();
+            obstacle.moveDown();
+            if (obstacle.getY() >= height) {
+                iterator.remove();
+            }
+        }
+    }
+
+    public void draw(TextGraphics textGraphics, Screen screen) {
+        // Clear screen
+        screen.clear();
+
         textGraphics = screen.newTextGraphics();
         textGraphics.setBackgroundColor(TextColor.Factory.fromString("#336699"));
         textGraphics.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(width * 16, height *9),' ');
@@ -98,7 +121,14 @@ public class Arena {
         for (Wall wall : walls){
             wall.draw(textGraphics, screen);
         }
-
+        for (Obstacle obstacle : obstacles) {
+            int x = obstacle.getX();
+            int y = obstacle.getY();
+            screen.setCharacter(x, y, new TextCharacter('X', TextColor.ANSI.RED, TextColor.ANSI.RED));
+            obstacle.draw(textGraphics,screen);
+            addObstacle();
+            updateObstacles();
+        }
         drawGameOverMessage(textGraphics);
         player.draw(screen.newTextGraphics(), screen);
     }

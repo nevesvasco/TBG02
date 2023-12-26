@@ -22,17 +22,17 @@ public class Game {
     TerminalSize terminalSize;
 
     public Game() throws IOException {
-        arena = new Arena(80, 24);
-        terminal = new DefaultTerminalFactory().createTerminal();
-        screen = new TerminalScreen(terminal);
-        terminalSize = new TerminalSize(40, 20);
+        terminalSize = new TerminalSize(190, 50);
         DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory()
                 .setInitialTerminalSize(terminalSize);
         terminal = terminalFactory.createTerminal();
+
+        screen = new TerminalScreen(terminal);
         screen.setCursorPosition(null); // we don't need a cursor
         screen.startScreen(); // screens must be started
         screen.doResizeIfNecessary(); // resize screen if necessary
 
+        arena = new Arena(120, 90);
     }
 
     private void draw() throws IOException {

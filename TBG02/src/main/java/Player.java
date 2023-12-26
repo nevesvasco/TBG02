@@ -41,7 +41,7 @@ import java.awt.event.KeyEvent;
         public void draw(TextGraphics graphics, Screen screen) {
             int x = position.getX();
             int y = position.getY();
-            int lado = 5; // O tamanho do lado do quadrado
+            int lado = 1; // O tamanho do lado do quadrado
 
             // Desenha um quadrado usando texto
             for (int i = 0; i < lado; i++) { // Para cada linha do quadrado
