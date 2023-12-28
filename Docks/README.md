@@ -17,6 +17,12 @@ Este projeto foi desenvolvido por Betânia dos Santos (a042807@umaia.pt), Daniel
 
 ## Modelo de Jogo
 
+![Opening Menu](https://github.com/nevesvasco/TBG02/assets/131387962/16495469-5874-4e3e-aa24-a30153ec0f14)
+![Pause menu](https://github.com/nevesvasco/TBG02/assets/131387962/27a68850-3cbb-4154-8972-db49355ef277)
+![Top score menu](https://github.com/nevesvasco/TBG02/assets/131387962/1b92b08c-be84-4f5c-8dd8-d06dbccda2f1)
+![mock_ecra_jogo](https://github.com/nevesvasco/TBG02/assets/131387962/d44a6423-8432-427f-8a1c-d0ed87e87e87)
+![CONTROLS](https://github.com/nevesvasco/TBG02/assets/131387962/a3b39d4b-276f-4858-b74c-eb9a1ed8912c)
+
 ## UML
 
 ![UML](https://github.com/nevesvasco/TBG02/blob/main/Docks/UML.png)
