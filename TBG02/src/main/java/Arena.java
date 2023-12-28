@@ -19,6 +19,15 @@ public class Arena {
     private int height;
     private boolean isRunning = true;
     private Graphics2D graphics;
+    private int scrollPosition = 0;
+
+    public int getScrollPosition() {
+        return scrollPosition;
+    }
+
+    public void setScrollPosition(int scrollPosition) {
+        this.scrollPosition = scrollPosition;
+    }
 
     public boolean isGameOver(){
         return gameOver;
