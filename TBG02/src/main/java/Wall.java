@@ -15,24 +15,16 @@ public class Wall extends Element {
 
     @Override
     public void draw(TextGraphics graphics, Screen screen) {
-
         TextCharacter wallCharacter = new TextCharacter('#', TextColor.ANSI.DEFAULT, TextColor.ANSI.DEFAULT);
         TextCharacter wallBackground = new TextCharacter(' ', TextColor.Factory.fromString("#999999"), TextColor.ANSI.DEFAULT);
-        TextCharacter boldCharacter = new TextCharacter('#', TextColor.ANSI.DEFAULT, TextColor.ANSI.DEFAULT);
-        boldCharacter = boldCharacter.withModifiers(Collections.singleton(SGR.BOLD));
 
-        int x = position.getX();
-        int y = position.getY();
+        int width = screen.getTerminalSize().getColumns();
 
-        // Draw horizontal walls only
-        graphics.setCharacter(x * 2, y * 0, wallCharacter);
-        graphics.setCharacter(x * 2 + 1, y * 0, wallBackground);
-
-        graphics.setCharacter(x * 2, y * 0, boldCharacter);
-        graphics.setCharacter(x * 2 + 1, y * 0, boldCharacter);
-
-        // Move a parede para a esquerda com a velocidade especificada
-        position.setX((position.getX() - SPEED + screen.getTerminalSize().getColumns()) % screen.getTerminalSize().getColumns());
+        // Desenha paredes horizontais na parte superior e inferior
+        for (int i = 0; i < width; i++) {
+            graphics.setCharacter(i, 0, wallCharacter); // Paredes na parte superior
+            graphics.setCharacter(i, screen.getTerminalSize().getRows() - 1, wallCharacter); // Paredes na parte inferior
+        }
     }
     public void moveLeft(int speed) {
         position.setX( position.getX() - speed);  // Move a parede para a esquerda com base na velocidade

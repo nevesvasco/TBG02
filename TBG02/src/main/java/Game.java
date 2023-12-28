@@ -45,8 +45,10 @@ public class Game {
     public void run() throws IOException {
         while (arena.isRunning()) {
             draw();
-            com.googlecode.lanterna.input.KeyStroke key = screen.readInput();
-            processKey(key);
+            com.googlecode.lanterna.input.KeyStroke key = screen.pollInput(); // Usar pollInput() em vez de readInput()
+            if (key != null) {
+                processKey(key);
+            }
         }
     }
 
