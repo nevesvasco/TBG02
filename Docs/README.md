@@ -25,7 +25,7 @@ Este projeto foi desenvolvido por Betânia dos Santos (a042807@umaia.pt), Daniel
 
 ## UML
 
-[![UML](https://github.com/nevesvasco/TBG02/blob/main/Docs/UML1.png)
+![UML](https://github.com/nevesvasco/TBG02/blob/main/Docs/UML1.png)
 
 ## Consequências
 
