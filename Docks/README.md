@@ -15,6 +15,8 @@ Este projeto foi desenvolvido por Betânia dos Santos (a042807@umaia.pt), Daniel
 - **Usar boosts (não implementado)** o personagem vai apanhar boosts que permite usar e diminuir a velocidade do personagem durante um certo período de tempo para ficar mais fácil de ultrapassar os obstáculos.
 - **Pause Menu (não implementado)** Isto servirá para pausar o jogo, onde também podemos reiniciar, ou sair do nível e remover o som do mesmo.
 
+## Modelo de Jogo
+
 ## UML
 
 ![UML](https://github.com/nevesvasco/TBG02/blob/main/Docks/UML.png)
@@ -37,7 +39,9 @@ Player
 
 Wall 
 
-Position 
+Position
+
+Obstacle
 
 ## Auto Avaliação
 
