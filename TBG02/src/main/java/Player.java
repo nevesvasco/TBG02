@@ -1,93 +1,76 @@
-import com.googlecode.lanterna.SGR;
 import com.googlecode.lanterna.TextCharacter;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
+import com.googlecode.lanterna.input.KeyStroke;
+import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.Screen;
+
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
-    public class Player extends Element {
-        private Graphics2D graphics;
-        private int width, height;
-        private Color color;
-        private boolean isJumping = false;
+public class Player extends Element {
+    private int width, height;
+    private Color color;
 
-        public boolean isJumping() {
-            return isJumping;
-        }
+    public void setJumping(boolean jumping) {
+        isJumping = jumping;
+    }
 
-        public void setJumping(boolean jumping) {
-            isJumping = jumping;
-        }
+    public boolean isJumping() {
+        return isJumping;
+    }
 
-        public boolean isBoosting() {
-            return isBoosting;
-        }
+    private boolean isJumping = false;
+    private int initialY; // Armazenar a posição inicial Y do jogador
 
-        public void setBoosting(boolean boosting) {
-            isBoosting = boosting;
-        }
+    public Player(int x, int y, int width, int height, Color color) {
+        super(x, y);
+        this.width = width;
+        this.height = height;
+        this.color = color;
+        this.initialY = y; // Definir a posição inicial Y do jogador
+    }
 
-        private boolean isBoosting = false;
+    public void draw(TextGraphics graphics, Screen screen) {
+        int x = position.getX();
+        int y = position.getY();
+        int radius = 3; // Raio do círculo
 
-        public Player(Graphics2D graphics, int x, int y, int width, int height, Color color) {
-            super(x, y);
-            this.graphics = graphics;
-            this.width = width;
-            this.height = height;
-            this.color = color;
-        }
+        graphics.setForegroundColor(TextColor.Factory.fromString("#FFFF33")); // Cor amarela para o círculo
 
-        public void draw(TextGraphics graphics, Screen screen) {
-            int x = position.getX();
-            int y = position.getY();
-            int lado = 1; // O tamanho do lado do quadrado
-
-            // Desenha um quadrado usando texto
-            for (int i = 0; i < lado; i++) { // Para cada linha do quadrado
-                for (int j = 0; j < lado; j++) { // Para cada coluna do quadrado
-                    if (i == 0 || i == lado - 1 || j == 0 || j == lado - 1) { // Se for uma borda
-                        screen.setCharacter(x + j, y + i, new TextCharacter(' ', TextColor.ANSI.DEFAULT, TextColor.ANSI.DEFAULT)); // Desenha o caractere de preenchimento
-                    } else { // Se for o interior
-                        screen.setCharacter(x + j, y + i, new TextCharacter(' ', TextColor.ANSI.YELLOW, TextColor.ANSI.YELLOW)); // Desenha um espaço em branco
-                    }
+        // Desenha uma aproximação de círculo usando asteriscos
+        for (int i = -radius; i <= radius; i++) {
+            for (int j = -radius; j <= radius; j++) {
+                if (i * i + j * j <= radius * radius + 2) {
+                    screen.setCharacter(x + j, y + i, new TextCharacter('*', TextColor.ANSI.YELLOW, TextColor.ANSI.YELLOW));
                 }
-            }
-            graphics.setForegroundColor(TextColor.Factory.fromString("#FFFF33")); // Cor amarela para o quadrado
-            graphics.enableModifiers(SGR.BOLD);
-        }
-
-
-
-        public void update() {
-            jump();
-            boost();
-        }
-        public void jump() {
-            int posicaoAntiga = position.getY();
-            if (isJumping) {
-                if (position.getY() > 0) {
-                    position.setY(position.getY() - 5);
-                    isJumping = false;
-                }
-            if (!isJumping) {
-                    isJumping = false;
-                    position.setY(posicaoAntiga);
-                }
-            }
-        }
-
-        public void boost() {
-            if (isBoosting) {
-                position.setX(position.getX() * 2);
-            } else {
-                position.setX(position.getX() / 2);
-            }
-        }
-
-        public void handleKeyUp(KeyEvent event) {
-            if (event.getKeyCode() == KeyEvent.VK_F) {
-                isBoosting = false;
             }
         }
     }
+
+    public void handleKeyPress(KeyStroke key, Arena arena) {
+        if (key.getKeyType() == KeyType.Character && key.getCharacter() == ' ') {
+            isJumping = true;
+            jump(key);
+        }
+    }
+
+    public void jump(KeyStroke key) {
+        if (key.getKeyType() == KeyType.Character && key.getCharacter() == ' ') {
+            if (!isJumping) {
+                isJumping = true; // Define o sinalizador de salto como verdadeiro
+            }
+        }
+        if (isJumping) {
+            if (position.getY() > 45 - 10) {
+                position.setY(position.getY() - 10); // Simula o pulo movendo para cima
+            } else {
+                isJumping = false; // Encerra o salto quando atinge a altura máxima
+            }
+        } else {
+            if (position.getY() < 45) {
+                position.setY(position.getY() + 10); // Volta à posição inicial
+            }
+        }
+    }
+}

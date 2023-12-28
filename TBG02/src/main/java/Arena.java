@@ -5,19 +5,21 @@ import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.Screen;
 
 import java.awt.*;
-import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class Arena {
     private boolean gameOver = false;
-    private int coinCount = 0;
     private int width;
     private int height;
     private boolean isRunning = true;
+<<<<<<< HEAD
     private Graphics2D graphics;
     private int scrollPosition = 0;
 
@@ -40,26 +42,25 @@ public class Arena {
         this.player = player;
     }
 
+=======
+>>>>>>> 696fb2e4ac446c5ad4e003cc1f8423c6162752c5
     Player player;
 
     public List<Wall> getWalls() {
         return walls;
     }
 
-    public void setWalls(List<Wall> walls) {
-        this.walls = walls;
-    }
-
     private List<Wall> walls = new ArrayList<Wall>();
-    private List<Obstacle> obstacles;
+    private List<Obstacle> obstacles ;
     private Random random;
+    private final ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
 
     public Arena(int width, int height) {
-        player = new Player(graphics,10,10, 16,9, Color.black);
+        player = new Player(90,45,6,9, Color.black);
         this.width = width;
         this.height = height;
         this.walls = createWalls();
-        this.obstacles = new ArrayList<>();
+        this.obstacles =  new ArrayList<Obstacle>() ;
         this.random = new Random();
     }
 
@@ -74,36 +75,31 @@ public class Arena {
             return;
         }
         if (key.getKeyType() == KeyType.Character && key.getCharacter() == 'q') {
+            isRunning = false;
             screen.close();
         }
-        if (key.getKeyType() == KeyType.ArrowUp) {
-            player.setJumping(true);
-            player.jump();
-        } else if (key.getKeyType() == KeyType.ArrowDown) {
-            player.setBoosting(true);
-            player.boost();
+        if (key.getKeyType() == KeyType.Character && key.getCharacter() == ' ') {
+            if (!player.isJumping()){
+                player.handleKeyPress(key, this);
+            }
         }
+
     }
     public void addWall(Wall wall) {
         walls.add(wall);
     }
 
-    public void setPlayerPosition(Position position) {
-        player.setPosition(position);
-    }
     public void resetGame() {
-        player.setPosition(new Position(10, 10));
-        coinCount = 0;
+        player.setPosition(new Position(90, 45));
         gameOver = false;
     }
-    public void gameOver() {
-        gameOver = true;
-    }
 
-    public void addObstacle() {
-        int x = random.nextInt(width);
-        int y = 0;
-        Obstacle obstacle = new Obstacle(x, y);
+    public void createObstacles() {
+
+        int initialY = random.nextInt(41) + 5; // Gera um número aleatório entre 5 e 45 para a posição Y inicial
+        int initialX = random.nextInt(119) + 99; // Posição X inicial
+
+        Obstacle obstacle = new Obstacle(initialX, initialY);
         obstacles.add(obstacle);
     }
 
@@ -111,8 +107,10 @@ public class Arena {
         Iterator<Obstacle> iterator = obstacles.iterator();
         while (iterator.hasNext()) {
             Obstacle obstacle = iterator.next();
-            obstacle.moveDown();
-            if (obstacle.getY() >= height) {
+            obstacle.moveLeft(); // Move o obstáculo para a esquerda
+
+            // Se o obstáculo atingir a posição X 0, remova-o
+            if (obstacle.position.getX() <= 0) {
                 iterator.remove();
             }
         }
@@ -130,16 +128,24 @@ public class Arena {
         for (Wall wall : walls){
             wall.draw(textGraphics, screen);
         }
+        if(obstacles.isEmpty()){
+            executorService.schedule(() -> {
+
+                while(obstacles.size() < 10){createObstacles();}
+            }, 400, TimeUnit.MILLISECONDS);
+        }
         for (Obstacle obstacle : obstacles) {
-            int x = obstacle.getX();
-            int y = obstacle.getY();
-            screen.setCharacter(x, y, new TextCharacter('X', TextColor.ANSI.RED, TextColor.ANSI.RED));
             obstacle.draw(textGraphics,screen);
-            addObstacle();
-            updateObstacles();
         }
         drawGameOverMessage(textGraphics);
         player.draw(screen.newTextGraphics(), screen);
+        updateObstacles();
+        if (player.isJumping()){
+            executorService.schedule(() -> {
+                player.setJumping(false);
+                player.setPosition(new Position(90, 45));
+            }, 400, TimeUnit.MILLISECONDS);
+        }
     }
     public void drawGameOverMessage(TextGraphics textGraphics) {
         if (gameOver) {
@@ -148,10 +154,6 @@ public class Arena {
             textGraphics.putString(new TerminalPosition(width / 2 - 10, height / 2 + 2), "Press 'R' to restart or Any Key to Exit");
         }
     }
-    private void movePlayer(Position position) {
-        player.setPosition(position);
-    }
-
     private List<Wall> createWalls() {
         List<Wall> walls = new ArrayList<>();
         for (int c = 0; c < width; c++) {
@@ -178,27 +180,5 @@ public class Arena {
 
     public boolean isRunning() {
         return isRunning;
-    }
-
-    public int getWidth() {
-        return width;
-    }
-
-    public void setWidth(int width) {
-        this.width = width;
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
-    public void setHeight(int height) {
-        this.height = height;
-    }
-
-
-
-    public void setRunning(boolean running) {
-        isRunning = running;
     }
 }

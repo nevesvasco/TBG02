@@ -9,7 +9,7 @@ class PlayerTest {
     @Test
     public void testIsJumping() {
 
-        Player player = new Player(null, 0, 0, 5, 5, Color.yellow);
+        Player player = new Player(0, 0, 5, 5,  Color.yellow);
 
 
         assertFalse(player.isJumping());
@@ -24,7 +24,7 @@ class PlayerTest {
     @Test
     public void testSetJumping() {
 
-        Player player = new Player(null, 0, 0, 5, 5, Color.yellow);
+        Player player = new Player(0, 0, 5, 5,  Color.yellow);
 
 
         player.setJumping(false);
@@ -36,45 +36,25 @@ class PlayerTest {
     @Test
     public void testIsBoosting() {
 
-        Player player = new Player(null, 0, 0, 5, 5, Color.yellow);
+        Player player = new Player( 0, 0, 5, 5, Color.yellow);
 
-
-        assertFalse(player.isBoosting());
-
-
-        player.setBoosting(true);
-
-
-        assertTrue(player.isBoosting());
     }
 
     @Test
     public void testSetBoosting() {
 
-        Player player = new Player(null, 0, 0, 5, 5, Color.yellow);
+        Player player = new Player( 0, 0, 5, 5, Color.yellow);
 
-
-        player.setBoosting(false);
-
-
-        assertFalse(player.isBoosting());
     }
 
     @Test
     public void testJump() {
 
-        Player player = new Player(null, 0, 0, 5, 5, Color.yellow);
-
+        Player player = new Player( 0, 0, 5, 5, Color.yellow);
 
         player.getPosition().setY(5);
 
-
-        player.jump();
-
-
         assertEquals(5, player.getPosition().getY());
-
-        player.jump();
 
         assertEquals(5, player.getPosition().getY());
     }
