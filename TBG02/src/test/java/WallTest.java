@@ -1,40 +1,25 @@
-import com.googlecode.lanterna.TerminalFacade;
-import com.googlecode.lanterna.screen.Screen;
-import com.googlecode.lanterna.terminal.swing.SwingTerminalFrame;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
+import org.junit.Test;
 
 public class WallTest {
 
-    private SwingTerminalFrame terminalFrame;
-    private Screen screen;
-
-    @BeforeEach
-    public void setUp() {
-        terminalFrame = TerminalFacade.createSwingTerminal();
-        terminalFrame.setVisible(true);
-        screen = new Screen(terminalFrame.getTerminal());
-        screen.startScreen();
-    }
-
-    @AfterEach
-    public void tearDown() {
-        if (screen != null) {
-            try {
-                screen.stopScreen();
-            } catch (Exception ignored) {
-            }
-        }
-        if (terminalFrame != null) {
-            terminalFrame.dispose();
-        }
-    }
-
     @Test
-    public void testDrawWall() {
-        Wall wall = new Wall(5, 5);
-        wall.draw(screen.newTextGraphics(), screen);
+    public void testMoveLeft() {
+        // Cria uma parede na posição inicial (x=10, y=5)
+        Wall wall = new Wall(10, 5);
+
+        // Obtém a posição antes de mover para a esquerda
+        Position initialPosition = wall.getPosition();
+
+        // Move a parede para a esquerda com uma determinada velocidade
+        int speed = 3;
+        wall.moveLeft(speed);
+
+        // Obtém a posição após mover para a esquerda
+        Position finalPosition = wall.getPosition();
+
+        // Verifica se a posição foi atualizada corretamente
+        assertEquals(initialPosition.getX() - speed, finalPosition.getX());
+        assertEquals(initialPosition.getY(), finalPosition.getY());
     }
 }
