@@ -11,18 +11,15 @@ Este projeto foi desenvolvido por Betânia dos Santos (a042807@umaia.pt), Daniel
 
 ## Features Planeadas e Implementadas
 
-- **Salto e duplo salto** O personagem vai poder dar um salto e um duplo salto para passar obstáculos normais e mais altos que lhe apareçam pelo caminho.
-- **Usar boosts** o personagem vai apanhar boosts que permite usar e diminuir a velocidade do personagem durante um certo período de tempo para ficar mais fácil de ultrapassar os obstáculos.
-- **Pause Menu** Isto servirá para pausar o jogo, onde também podemos reiniciar, ou sair do nível e remover o som do mesmo.
+- **Salto (não implementado) e duplo salto (não implementado)** O personagem vai poder dar um salto e um duplo salto para passar obstáculos normais e mais altos que lhe apareçam pelo caminho.
+- **Usar boosts (não implementado)** o personagem vai apanhar boosts que permite usar e diminuir a velocidade do personagem durante um certo período de tempo para ficar mais fácil de ultrapassar os obstáculos.
+- **Pause Menu (não implementado)** Isto servirá para pausar o jogo, onde também podemos reiniciar, ou sair do nível e remover o som do mesmo.
 
-
-## Implementação
-
-Inserir as features e o path onde eles estão localizados.
+## Modelos de Jogo
 
 ## UML
 
-![UML](https://github.com/nevesvasco/TBG02/blob/main/Docks/UML.png)
+[![UML](https://github.com/nevesvasco/TBG02/blob/main/Docs/UML1.png)
 
 ## Consequências
 
