@@ -18,8 +18,13 @@ public class Arena {
     private boolean gameOver = false;
     private int width;
     private int height;
+
+    private PauseMenu pause;
+    public void setRunning(boolean running) {
+        isRunning = running;
+    }
+
     private boolean isRunning = true;
-<<<<<<< HEAD
     private Graphics2D graphics;
     private int scrollPosition = 0;
 
@@ -42,8 +47,6 @@ public class Arena {
         this.player = player;
     }
 
-=======
->>>>>>> 696fb2e4ac446c5ad4e003cc1f8423c6162752c5
     Player player;
 
     public List<Wall> getWalls() {

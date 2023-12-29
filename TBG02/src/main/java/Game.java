@@ -33,6 +33,7 @@ public class Game {
         screen.doResizeIfNecessary(); // resize screen if necessary
 
         arena = new Arena(120, 90);
+
     }
 
     private void draw() throws IOException {
