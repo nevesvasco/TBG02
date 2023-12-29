@@ -43,7 +43,7 @@ public class Arena {
     }
 
 =======
->>>>>>> 696fb2e4ac446c5ad4e003cc1f8423c6162752c5
+        >>>>>>> 696fb2e4ac446c5ad4e003cc1f8423c6162752c5
     Player player;
 
     public List<Wall> getWalls() {
