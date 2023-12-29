@@ -18,7 +18,7 @@ public class Arena {
     private boolean gameOver = false;
     public int width;
     public int height;
-
+    public double pontuacao = 0;
 
     public void setRunning(boolean running) {
         isRunning = running;
@@ -139,7 +139,9 @@ public class Arena {
         textGraphics = screen.newTextGraphics();
         textGraphics.setBackgroundColor(TextColor.Factory.fromString("#336699"));
         textGraphics.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(width * 16, height *9),' ');
-        textGraphics.setForegroundColor(TextColor.ANSI.GREEN);
+        textGraphics.setForegroundColor(TextColor.ANSI.BLACK);
+        textGraphics.putString(new TerminalPosition(width + 55, height / 8 - 8), "Pontos: "+ (int)pontuacao);
+
         for (Wall wall : walls){
             wall.draw(textGraphics, screen);
         }
@@ -161,6 +163,9 @@ public class Arena {
                 player.setPosition(new Position(90, 45));
             }, 400, TimeUnit.MILLISECONDS);
         }
+        executorService.schedule(() -> {
+               pontuacao += 0.01;
+        }, 5, TimeUnit.SECONDS);
     }
     public void drawGameOverMessage(TextGraphics textGraphics) {
         if (gameOver) {
