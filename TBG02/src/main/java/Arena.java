@@ -16,12 +16,22 @@ import java.util.concurrent.TimeUnit;
 
 public class Arena {
     private boolean gameOver = false;
-    private int width;
-    private int height;
+    public int width;
+    public int height;
 
-    private PauseMenu pause;
+
     public void setRunning(boolean running) {
         isRunning = running;
+    }
+
+    private boolean isPaused = false;
+
+    public boolean isPaused() {
+        return isPaused;
+    }
+
+    public void setPaused(boolean paused) {
+        isPaused = paused;
     }
 
     private boolean isRunning = true;
@@ -60,7 +70,6 @@ public class Arena {
 
     public Arena(int width, int height) {
         player = new Player(90,45,6,9, Color.black);
-        this.pause = new PauseMenu(90,20);
         this.width = width;
         this.height = height;
         this.walls = createWalls();
@@ -88,14 +97,10 @@ public class Arena {
                 player.handleKeyPress(key, this);
             }
         }
-        if (key.getKeyType() == KeyType.Character && key.getCharacter() == 'p') {
-            //PauseGame(screen);
-        }
+
 
     }
-        public void PauseGame(Screen screen) throws IOException{
-            pause.draw(this, screen, this.width, this.height);
-        }
+
     public void addWall(Wall wall) {
         walls.add(wall);
     }
@@ -135,7 +140,6 @@ public class Arena {
         textGraphics.setBackgroundColor(TextColor.Factory.fromString("#336699"));
         textGraphics.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(width * 16, height *9),' ');
         textGraphics.setForegroundColor(TextColor.ANSI.GREEN);
-        textGraphics.putString(new TerminalPosition(width - 16, 9), "Energy: ");
         for (Wall wall : walls){
             wall.draw(textGraphics, screen);
         }

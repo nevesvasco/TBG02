@@ -7,82 +7,35 @@ import java.io.IOException;
 
 public class PauseMenu {
 
-    public Position getPosition() {
-        return position;
-    }
+    public int width;
+    public int height;
 
-    public void setPosition(Position position) {
-        this.position = position;
-    }
-
-    private Position position;
-
-    int x;
-
-    public int getX() {
-        return position.getX();
-    }
-
-    public void setX(int x) {
-        position.setX(x);
-        this.x = x;
-    }
-
-    public int getY() {
-        return position.getY();
-    }
-
-    public void setY(int y) {
-        position.setY(y);
-        this.y = y;
-    }
-
-    int y;
-
-    public PauseMenu(int x, int y) {
-        this.x = x;
-        this.y = y;
-        position = new Position(x, y);
+    public PauseMenu(int width, int height) {
+        this.width = width;
+        this.height = height;
     }
 
 
 
-    public void draw(Arena arena,Screen screen,int width , int height ) throws IOException {
-        screen.clear();
-        TextGraphics graphics = screen.newTextGraphics();
+    public void draw(TextGraphics graphics, int width , int height ) throws IOException {
         graphics.setBackgroundColor(TextColor.Factory.fromString("#336699"));
-        graphics.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(width, height), ' ');
-        graphics.setForegroundColor(TextColor.ANSI.WHITE);
-        graphics.putString(new TerminalPosition(width / 2 - 5, height / 2), "Game Paused");
+        graphics.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(width * 16, height * 9), ' ');
+        // Desenha a caixa do menu de pausa
+        graphics.setForegroundColor(TextColor.ANSI.BLACK);
+        graphics.setBackgroundColor(TextColor.ANSI.WHITE);
 
+        graphics.fillRectangle(new TerminalPosition(width - 45, height / 4 - 5), new TerminalSize(40, 10), ' ');
 
-        graphics.setForegroundColor(TextColor.ANSI.GREEN);
-        graphics.putString(new TerminalPosition(width / 2 - 5, height / 2 + 2), "Unpause (space)");
+        // Desenha o texto "Pause"
+        graphics.putString(new TerminalPosition(width - 28, height / 4 - 4), "Pause");
 
+        // Desenha os botões
+        graphics.putString(new TerminalPosition(width - 28, height / 4 - 1), "[Continue]");
 
-        graphics.setForegroundColor(TextColor.ANSI.RED);
-        graphics.putString(new TerminalPosition(width / 2 - 5, height / 2 + 4), "Quit (q)");
+        // Desenha os botões
+        graphics.putString(new TerminalPosition(width - 28, height / 4 + 1), "[Restart]");
 
-
-        com.googlecode.lanterna.input.KeyStroke key = screen.pollInput();
-
-
-        while (key != null) {
-            if (key.getKeyType() == KeyType.Character && key.getCharacter() == ' ') {
-
-                arena.setRunning(true);
-                screen.refresh();
-                break;
-            }
-
-            if (key.getKeyType() == KeyType.Character && key.getCharacter() == 'q') {
-
-                screen.close();
-                System.exit(0);
-            }
-
-
-            key = screen.pollInput();
-        }
+        //Desenha a caixa de seleção de mudo e rótulo
+        graphics.putString(new TerminalPosition(width - 45, height / 4 - 5), "[ ] Mute");
     }
 }

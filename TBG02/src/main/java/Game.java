@@ -1,4 +1,6 @@
 import com.googlecode.lanterna.TerminalSize;
+import com.googlecode.lanterna.graphics.TextGraphics;
+import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
@@ -17,6 +19,7 @@ public class Game {
         this.arena = arena;
     }
 
+    PauseMenu pause;
     Arena arena;
     Screen screen;
     TerminalSize terminalSize;
@@ -33,7 +36,7 @@ public class Game {
         screen.doResizeIfNecessary(); // resize screen if necessary
 
         arena = new Arena(120, 90);
-
+        this.pause = new PauseMenu(120,90);
     }
 
     private void draw() throws IOException {
@@ -41,9 +44,16 @@ public class Game {
             System.exit(0);
         }
         //Arena arenapre = ArenaLoader.loadArenaFromFile("maps/map1.txt");
-        screen.clear();
-        arena.draw(screen.newTextGraphics(), screen);
-        screen.refresh();
+        if (!arena.isPaused()){
+            screen.clear();
+            arena.draw(screen.newTextGraphics(), screen);
+            screen.refresh();
+        }
+        else {
+            screen.clear();
+            pause.draw(screen.newTextGraphics(), pause.width, pause.height);
+            screen.refresh();
+        }
     }
 
     public void run() throws IOException {
@@ -59,5 +69,14 @@ public class Game {
 
     public void processKey(com.googlecode.lanterna.input.KeyStroke key) throws IOException {
         arena.processKey(key, screen);
+        if (key.getKeyType() == KeyType.Character && key.getCharacter() == 'p') {
+            if (!arena.isPaused()){
+                arena.setPaused(true);
+                screen.clear();
+            }
+            else {
+                arena.setPaused(false);
+            }
+        }
     }
 }
