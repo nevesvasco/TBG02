@@ -37,6 +37,9 @@ public class Game {
     }
 
     private void draw() throws IOException {
+        if (!arena.isRunning()){
+            System.exit(0);
+        }
         //Arena arenapre = ArenaLoader.loadArenaFromFile("maps/map1.txt");
         screen.clear();
         arena.draw(screen.newTextGraphics(), screen);
@@ -51,6 +54,7 @@ public class Game {
                 processKey(key);
             }
         }
+        System.exit(0);
     }
 
     public void processKey(com.googlecode.lanterna.input.KeyStroke key) throws IOException {

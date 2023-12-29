@@ -6,20 +6,46 @@ import com.googlecode.lanterna.screen.Screen;
 import java.io.IOException;
 
 public class PauseMenu {
-    public void setPosition(Position position) {
-        this.position = position;
-    }
 
     public Position getPosition() {
         return position;
     }
 
+    public void setPosition(Position position) {
+        this.position = position;
+    }
+
     private Position position;
 
-    public PauseMenu(int x, int y) {
-        position.setX(x);
-        position.setY(y);
+    int x;
+
+    public int getX() {
+        return position.getX();
     }
+
+    public void setX(int x) {
+        position.setX(x);
+        this.x = x;
+    }
+
+    public int getY() {
+        return position.getY();
+    }
+
+    public void setY(int y) {
+        position.setY(y);
+        this.y = y;
+    }
+
+    int y;
+
+    public PauseMenu(int x, int y) {
+        this.x = x;
+        this.y = y;
+        position = new Position(x, y);
+    }
+
+
 
     public void draw(Arena arena,Screen screen,int width , int height ) throws IOException {
         screen.clear();

@@ -60,6 +60,7 @@ public class Arena {
 
     public Arena(int width, int height) {
         player = new Player(90,45,6,9, Color.black);
+        this.pause = new PauseMenu(90,20);
         this.width = width;
         this.height = height;
         this.walls = createWalls();
@@ -75,6 +76,7 @@ public class Arena {
         }
         if (key.getKeyType() == KeyType.EOF) {
             isRunning = false;
+            screen.close();
             return;
         }
         if (key.getKeyType() == KeyType.Character && key.getCharacter() == 'q') {
@@ -86,8 +88,14 @@ public class Arena {
                 player.handleKeyPress(key, this);
             }
         }
+        if (key.getKeyType() == KeyType.Character && key.getCharacter() == 'p') {
+            //PauseGame(screen);
+        }
 
     }
+        public void PauseGame(Screen screen) throws IOException{
+            pause.draw(this, screen, this.width, this.height);
+        }
     public void addWall(Wall wall) {
         walls.add(wall);
     }
