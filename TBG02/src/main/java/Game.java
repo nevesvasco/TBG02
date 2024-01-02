@@ -18,7 +18,7 @@ public class Game {
     public void setArena(Arena arena) {
         this.arena = arena;
     }
-
+    GameMenu menu;
     PauseMenu pause;
     Arena arena;
     Screen screen;
@@ -37,23 +37,31 @@ public class Game {
 
         arena = new Arena(120, 90);
         this.pause = new PauseMenu(120,90);
+        this.menu = new GameMenu (120,90);
     }
-
     private void draw() throws IOException {
-        if (!arena.isRunning()){
-            System.exit(0);
-        }
-        //Arena arenapre = ArenaLoader.loadArenaFromFile("maps/map1.txt");
-        if (!arena.isPaused()){
-            screen.clear();
-            arena.draw(screen.newTextGraphics(), screen);
-            screen.refresh();
+        if (menu.isGamestarted()){
+            if (!arena.isRunning()){
+                System.exit(0);
+            }
+            //Arena arenapre = ArenaLoader.loadArenaFromFile("maps/map1.txt");
+            if (!arena.isPaused()){
+                screen.clear();
+                arena.draw(screen.newTextGraphics(), screen);
+                screen.refresh();
+            }
+            else {
+                screen.clear();
+                pause.draw(screen.newTextGraphics(), pause.width, pause.height);
+                screen.refresh();
+            }
         }
         else {
             screen.clear();
-            pause.draw(screen.newTextGraphics(), pause.width, pause.height);
+            menu.draw(screen.newTextGraphics(), menu.width, menu.height);
             screen.refresh();
         }
+
     }
 
     public void run() throws IOException {
@@ -77,6 +85,8 @@ public class Game {
             else {
                 arena.setPaused(false);
             }
+        } if (key.getKeyType() == KeyType.Enter){
+            menu.NewGame();
         }
     }
 }
