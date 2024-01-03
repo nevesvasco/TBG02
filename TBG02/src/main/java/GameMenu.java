@@ -32,7 +32,7 @@ public class GameMenu {
     }
 
     public void draw(TextGraphics graphics, int width, int height) throws IOException {
-        graphics.setBackgroundColor(TextColor.Factory.fromString("#336699"));
+        graphics.setBackgroundColor(TextColor.Factory.fromString("#F9E76D"));
         graphics.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(width * 16, height * 9), ' ');
 
         graphics.setForegroundColor(TextColor.ANSI.BLACK);
@@ -42,37 +42,12 @@ public class GameMenu {
 
         graphics.putString(new TerminalPosition(width - 30, height / 4 - 4), "Rush Dash");
 
-        graphics.putString(new TerminalPosition(width - 39, height / 4 - 1), "Press Enter to start the game");
+        graphics.putString(new TerminalPosition(width - 40, height / 4 - 1), "Press Enter to start the game");
 
-        graphics.putString(new TerminalPosition(width - 39, height / 4 + 1), "Press Q to close the game");
+        graphics.putString(new TerminalPosition(width - 40, height / 4 + 1), "Press Q to close the game");
 
         graphics.putString(new TerminalPosition(width - 45, height / 4 - 5), " ");
 
-
-        for (int i = 0; i < 20; i++) {
-
-
-            int shape = (int) (Math.random() * 2) + 1;
-
-            int x = (int) (Math.random() * width);
-            int y = (int) (Math.random() * height);
-
-            if (!isPointInMenu(x, y)) {
-                int size = (int) (Math.random() * 20) + 1;
-
-                switch (shape) {
-                    case 1:
-                        graphics.fillRectangle(new TerminalPosition(x , y ), new TerminalSize(size,size), '*');
-                        break;
-                    case 2:
-                        graphics.fillTriangle(new TerminalPosition(x , y), new TerminalPosition(x + size, y + size), new TerminalPosition(x - size, y + size), '*');
-                        break;
-                }
-            }
-        }
-    }
-    private boolean isPointInMenu(int x, int y) {
-        return (x >= width - 45 && x <= width && y >= height / 4 - 5 && y <= height / 4 + 10);
     }
 }
 

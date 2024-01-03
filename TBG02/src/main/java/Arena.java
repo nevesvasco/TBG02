@@ -112,7 +112,7 @@ public class Arena {
 
     public void createObstacles() {
 
-        int initialY = random.nextInt(41) + 5; // Gera um número aleatório entre 5 e 45 para a posição Y inicial
+        int initialY = random.nextInt(39) + 37; // Gera um número aleatório entre 5 e 45 para a posição Y inicial
         int initialX = random.nextInt(119) + 99; // Posição X inicial
 
         Obstacle obstacle = new Obstacle(initialX, initialY);
@@ -137,7 +137,7 @@ public class Arena {
         screen.clear();
 
         textGraphics = screen.newTextGraphics();
-        textGraphics.setBackgroundColor(TextColor.Factory.fromString("#336699"));
+        textGraphics.setBackgroundColor(TextColor.Factory.fromString("#F9E76D"));
         textGraphics.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(width * 16, height *9),' ');
         textGraphics.setForegroundColor(TextColor.ANSI.BLACK);
         textGraphics.putString(new TerminalPosition(width + 55, height / 8 - 8), "Pontos: "+ (int)pontuacao);
@@ -149,7 +149,7 @@ public class Arena {
             executorService.schedule(() -> {
 
                 while(obstacles.size() < 10){createObstacles();}
-            }, 400, TimeUnit.MILLISECONDS);
+            }, 100, TimeUnit.MILLISECONDS);
         }
         for (Obstacle obstacle : obstacles) {
             obstacle.draw(textGraphics,screen);
@@ -164,8 +164,8 @@ public class Arena {
             }, 400, TimeUnit.MILLISECONDS);
         }
         executorService.schedule(() -> {
-               pontuacao += 0.01;
-        }, 5, TimeUnit.SECONDS);
+               pontuacao += 1;
+        }, 5, TimeUnit.MILLISECONDS);
     }
     public void drawGameOverMessage(TextGraphics textGraphics) {
         if (gameOver) {

@@ -18,7 +18,7 @@ public class PauseMenu {
 
 
     public void draw(TextGraphics graphics, int width , int height ) throws IOException {
-        graphics.setBackgroundColor(TextColor.Factory.fromString("#336699"));
+        graphics.setBackgroundColor(TextColor.Factory.fromString("#F9E76D"));
         graphics.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(width * 16, height * 9), ' ');
 
         graphics.setForegroundColor(TextColor.ANSI.BLACK);
@@ -28,9 +28,11 @@ public class PauseMenu {
 
         graphics.putString(new TerminalPosition(width - 28, height / 4 - 4), "Pause");
 
-        graphics.putString(new TerminalPosition(width - 28, height / 4 - 1), "[Continue]");
+        graphics.putString(new TerminalPosition(width - 35, height / 4 - 1), "[Continue]");
 
-        graphics.putString(new TerminalPosition(width - 28, height / 4 + 1), "[Restart]");
+        graphics.putString(new TerminalPosition(width - 35, height / 4 - 1), "[Press P to continue]");
+
+        graphics.putString(new TerminalPosition(width - 35, height / 4 + 1), "[Press R to Restart]");
 
         graphics.putString(new TerminalPosition(width - 45, height / 4 - 5), "[ ] Mute");
 
