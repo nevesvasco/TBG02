@@ -44,6 +44,11 @@ public class Obstacle extends Element {
         }
     }
 
+    @Override
+    public void gameOver() {
+        isDead = true;
+    }
+
     private void drawSquare(TextGraphics graphics, Screen screen, int x, int y) {
         for (int i = 0; i < 2; i++) {
             for (int j = 0; j < 2; j++) {
@@ -68,5 +73,4 @@ public class Obstacle extends Element {
             }
         }
     }
-
 }

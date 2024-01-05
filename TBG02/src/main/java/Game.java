@@ -16,6 +16,7 @@ public class Game {
     Arena arena;
     Screen screen;
     TerminalSize terminalSize;
+    GameOverMenu gameOver;
 
     public Game() throws IOException {
         terminalSize = new TerminalSize(190, 50);
@@ -38,16 +39,27 @@ public class Game {
             if (!arena.isRunning()) {
                 System.exit(0);
             }
-            if (!arena.isPaused()) {
-                screen.clear();
-                arena.draw(screen.newTextGraphics(), screen);
-                screen.refresh();
-            } else {
-                screen.clear();
-                pause.draw(screen.newTextGraphics(), pause.width, pause.height);
-                screen.refresh();
+            else {
+                if (!arena.isGameOver()) {
+                    if (!arena.isPaused()) {
+                        screen.clear();
+                        arena.draw(screen.newTextGraphics(), screen);
+                        screen.refresh();
+                    } else {
+                        screen.clear();
+                        pause.draw(screen.newTextGraphics(), pause.width, pause.height);
+                        screen.refresh();
+                    }
+                }
+                else {
+                    screen.clear();
+                    gameOver.draw(screen.newTextGraphics(), gameOver.width, gameOver.height);
+                    screen.refresh();
+                }
             }
-        } else {
+        }
+        else {
+
             screen.clear();
             menu.draw(screen.newTextGraphics(), menu.width, menu.height);
             screen.refresh();
@@ -67,17 +79,28 @@ public class Game {
 
     public void processKey(com.googlecode.lanterna.input.KeyStroke key) throws IOException {
         arena.processKey(key, screen);
-        if (key.getKeyType() == KeyType.Character && key.getCharacter() == 'p') {
-            if (!arena.isPaused()) {
-                arena.setPaused(true);
-                screen.clear();
-            } else {
-                arena.setPaused(false);
+        if (!arena.isGameOver()) {
+            if (key.getKeyType() == KeyType.Character && key.getCharacter() == 'p') {
+                if (!arena.isPaused()) {
+                    arena.setPaused(true);
+                    screen.clear();
+                } else {
+                    arena.setPaused(false);
+                }
+            } else if (key.getKeyType() == KeyType.Character && key.getCharacter() == 'r') {
+                restartGame();
+            } else if (key.getKeyType() == KeyType.Enter) {
+                menu.NewGame();
             }
-        } else if (key.getKeyType() == KeyType.Character && key.getCharacter() == 'r') {
-            restartGame();
-        } else if (key.getKeyType() == KeyType.Enter) {
-            menu.NewGame();
+        }
+        else {
+            if (key.getKeyType() == KeyType.Enter) {
+                restartGame();
+            }
+            if (key.getKeyType() == KeyType.Character && key.getCharacter() == 'q') {
+                arena.setRunning(false);
+                screen.close();
+            }
         }
     }
 

@@ -23,6 +23,7 @@ public class Arena {
         return pontuacao;
     }
 
+    private Collision collision;
     public void setPontuacao(double pontuacao) {
         this.pontuacao = pontuacao;
     }
@@ -86,6 +87,7 @@ public class Arena {
         this.walls = createWalls();
         this.obstacles =  new ArrayList<Obstacle>() ;
         this.random = new Random();
+        this.collision = new Collision(0,0);
     }
 
     public void processKey(KeyStroke key, Screen screen) throws IOException {
@@ -177,6 +179,12 @@ public class Arena {
         executorService.schedule(() -> {
                pontuacao += 1;
         }, 5, TimeUnit.MILLISECONDS);
+
+        if (collision.collidesWith(obstacles, player)){
+            setPaused(true);
+            gameOver = true;
+            drawGameOverMessage(textGraphics);
+        }
     }
     public void drawGameOverMessage(TextGraphics textGraphics) {
         if (gameOver) {

@@ -48,6 +48,11 @@ public class Player extends Element {
         }
     }
 
+    @Override
+    public void gameOver() {
+        isDead = true;
+    }
+
     public void handleKeyPress(KeyStroke key, Arena arena) {
         if (key.getKeyType() == KeyType.Character && key.getCharacter() == ' ') {
             isJumping = true;
@@ -73,4 +78,11 @@ public class Player extends Element {
             }
         }
     }
+    public boolean collidesWithElement(Element element) {
+        if (position.equals(element.getPosition())) {
+            return true;
+        }
+        return false;
+    }
+
 }

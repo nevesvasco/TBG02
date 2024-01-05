@@ -3,6 +3,7 @@ import com.googlecode.lanterna.screen.Screen;
 
 public abstract class Element {
     protected Position position;
+    protected boolean isDead = false;
     public Element(int x, int y) {
         position = new Position(x, y);
     }
@@ -16,4 +17,6 @@ public abstract class Element {
     }
 
     public abstract void draw(TextGraphics graphics, Screen screen);
+
+    public abstract void gameOver();
 }

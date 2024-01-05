@@ -26,6 +26,12 @@ public class Wall extends Element {
             graphics.setCharacter(i, screen.getTerminalSize().getRows() - 1, wallCharacter); // Paredes na parte inferior
         }
     }
+
+    @Override
+    public void gameOver() {
+
+    }
+
     public void moveLeft(int speed) {
         position.setX( position.getX() - speed);  // Move a parede para a esquerda com base na velocidade
     }
