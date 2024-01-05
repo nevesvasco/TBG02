@@ -84,5 +84,6 @@ public class Game {
     private void restartGame() throws IOException {
         arena.setPaused(false);
         arena = new Arena(120, 90);
+        arena.setPontuacao(0);
     }
 }

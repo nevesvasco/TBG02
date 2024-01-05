@@ -18,7 +18,18 @@ public class Arena {
     private boolean gameOver = false;
     public int width;
     public int height;
+
+    public double getPontuacao() {
+        return pontuacao;
+    }
+
+    public void setPontuacao(double pontuacao) {
+        this.pontuacao = pontuacao;
+    }
+
     public double pontuacao = 0;
+
+
 
     public void setRunning(boolean running) {
         isRunning = running;
