@@ -32,6 +32,7 @@ public class Game {
         arena = new Arena(120, 90);
         this.pause = new PauseMenu(120,90);
         this.menu = new GameMenu (120,90);
+        this.gameOver = new GameOverMenu(120, 90);
     }
 
     private void draw() throws IOException {
@@ -40,18 +41,18 @@ public class Game {
                 System.exit(0);
             }
             else {
-                if (!arena.isGameOver()) {
-                    if (!arena.isPaused()) {
-                        screen.clear();
-                        arena.draw(screen.newTextGraphics(), screen);
-                        screen.refresh();
-                    } else {
-                        screen.clear();
-                        pause.draw(screen.newTextGraphics(), pause.width, pause.height);
-                        screen.refresh();
+                    if (!arena.isGameOver()) {
+                        if (!arena.isPaused()) {
+                            screen.clear();
+                            arena.draw(screen.newTextGraphics(), screen);
+                            screen.refresh();
+                        } else if (arena.isPaused()) {
+                            screen.clear();
+                            pause.draw(screen.newTextGraphics(), pause.width, pause.height);
+                            screen.refresh();
+                        }
                     }
-                }
-                else {
+                else if(arena.isGameOver()) {
                     screen.clear();
                     gameOver.draw(screen.newTextGraphics(), gameOver.width, gameOver.height);
                     screen.refresh();
@@ -78,8 +79,8 @@ public class Game {
     }
 
     public void processKey(com.googlecode.lanterna.input.KeyStroke key) throws IOException {
-        arena.processKey(key, screen);
         if (!arena.isGameOver()) {
+            arena.processKey(key, screen);
             if (key.getKeyType() == KeyType.Character && key.getCharacter() == 'p') {
                 if (!arena.isPaused()) {
                     arena.setPaused(true);
@@ -100,11 +101,13 @@ public class Game {
             if (key.getKeyType() == KeyType.Character && key.getCharacter() == 'q') {
                 arena.setRunning(false);
                 screen.close();
+                System.exit(0);
             }
         }
     }
 
     private void restartGame() throws IOException {
+        arena.setGameOver(false);
         arena.setPaused(false);
         arena = new Arena(120, 90);
         arena.setPontuacao(0);

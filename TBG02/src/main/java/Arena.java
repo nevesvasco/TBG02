@@ -15,6 +15,10 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class Arena {
+    public void setGameOver(boolean gameOver) {
+        this.gameOver = gameOver;
+    }
+
     private boolean gameOver = false;
     public int width;
     public int height;
@@ -167,7 +171,6 @@ public class Arena {
         for (Obstacle obstacle : obstacles) {
             obstacle.draw(textGraphics,screen);
         }
-        drawGameOverMessage(textGraphics);
         player.draw(screen.newTextGraphics(), screen);
         updateObstacles();
         if (player.isJumping()){
@@ -179,18 +182,10 @@ public class Arena {
         executorService.schedule(() -> {
                pontuacao += 1;
         }, 5, TimeUnit.MILLISECONDS);
-
-        if (collision.collidesWith(obstacles, player)){
-            setPaused(true);
-            gameOver = true;
-            drawGameOverMessage(textGraphics);
-        }
-    }
-    public void drawGameOverMessage(TextGraphics textGraphics) {
-        if (gameOver) {
-            textGraphics.setForegroundColor(TextColor.ANSI.RED);
-            textGraphics.putString(new TerminalPosition(width / 2 - 5, height / 2), "Game Over");
-            textGraphics.putString(new TerminalPosition(width / 2 - 10, height / 2 + 2), "Press 'R' to restart or Any Key to Exit");
+        if (!gameOver) {
+            if (collision.collidesWith(obstacles, player)) {
+                gameOver = true;
+            }
         }
     }
     private List<Wall> createWalls() {
@@ -205,18 +200,6 @@ public class Arena {
         }
         return walls;
     }
-
-    public boolean canPlayerMove(Position position) {
-        for (Wall wall : walls) {
-            if (wall.getPosition().equals(position)) {
-
-                return false;
-            }
-        }
-        return position.getX() >= 0 && position.getX() < width &&
-                position.getY() >= 0 && position.getY() < height;
-    }
-
     public boolean isRunning() {
         return isRunning;
     }

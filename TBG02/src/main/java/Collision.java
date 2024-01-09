@@ -21,12 +21,13 @@ public class Collision extends Element{
     }
 
     public boolean collidesWith(List<Obstacle> elements, Player player) {
-        for (Element element : elements) {
-            if (element.getPosition() == player.getPosition()){
-                element.gameOver();
+        for (Obstacle obstacle : elements) {
+            if (obstacle.position.getX()==player.position.getX()+ 1 && obstacle.position.getY()==player.position.getY()+ 2){
                 player.gameOver();
+                obstacle.gameOver();
+                return true;
             }
         }
-        return true;
+        return false;
     }
 }

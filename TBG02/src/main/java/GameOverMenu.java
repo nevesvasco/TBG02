@@ -32,7 +32,7 @@ public class GameOverMenu {
     }
 
     public void draw(TextGraphics graphics, int width, int height) throws IOException {
-        graphics.setBackgroundColor(TextColor.Factory.fromString("#00000"));
+        graphics.setBackgroundColor(TextColor.ANSI.BLACK);
         graphics.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(width * 16, height * 9), ' ');
 
         graphics.setForegroundColor(TextColor.ANSI.BLACK);
