@@ -129,8 +129,8 @@ public class Arena {
 
     public void createObstacles() {
 
-        int initialY = random.nextInt(39) + 37; // Gera um número aleatório entre 5 e 45 para a posição Y inicial
-        int initialX = random.nextInt(119) + 99; // Posição X inicial
+        int initialY = random.nextInt(38) + 35; // Gera um número aleatório entre 5 e 45 para a posição Y inicial
+        int initialX = random.nextInt(119) + 110;
 
         Obstacle obstacle = new Obstacle(initialX, initialY);
         obstacles.add(obstacle);
@@ -140,9 +140,9 @@ public class Arena {
         Iterator<Obstacle> iterator = obstacles.iterator();
         while (iterator.hasNext()) {
             Obstacle obstacle = iterator.next();
-            obstacle.moveLeft(); // Move o obstáculo para a esquerda
+            obstacle.moveLeft();
 
-            // Se o obstáculo atingir a posição X 0, remova-o
+
             if (obstacle.position.getX() <= 0) {
                 iterator.remove();
             }
@@ -150,7 +150,6 @@ public class Arena {
     }
 
     public void draw(TextGraphics textGraphics, Screen screen) {
-        // Clear screen
         screen.clear();
 
         textGraphics = screen.newTextGraphics();
@@ -164,9 +163,8 @@ public class Arena {
         }
         if(obstacles.isEmpty()){
             executorService.schedule(() -> {
-
-                while(obstacles.size() < 10){createObstacles();}
-            }, 100, TimeUnit.MILLISECONDS);
+                while(obstacles.size() < 4){createObstacles();}
+            }, 5, TimeUnit.MILLISECONDS);
         }
         for (Obstacle obstacle : obstacles) {
             obstacle.draw(textGraphics,screen);
