@@ -5,11 +5,9 @@ import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.Screen;
 
 import java.awt.*;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.io.*;
+import java.util.*;
 import java.util.List;
-import java.util.Random;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -20,6 +18,7 @@ public class Arena {
     }
 
     private boolean gameOver = false;
+    private final String leaderboardFilePath = "./leaderboard.txt";
     public int width;
     public int height;
 
@@ -183,7 +182,9 @@ public class Arena {
         if (!gameOver) {
             if (collision.collidesWith(obstacles, player)) {
                 gameOver = true;
+                saveScoreToLeaderboard();
             }
+
         }
     }
     private List<Wall> createWalls() {
@@ -201,4 +202,61 @@ public class Arena {
     public boolean isRunning() {
         return isRunning;
     }
+
+    private void saveScoreToLeaderboard() {
+        LeaderBoardEntry entry = new LeaderBoardEntry((int) pontuacao);
+
+        // Carregar entradas do leaderboard do arquivo
+        List<LeaderBoardEntry> existingEntries = loadLeaderboardFromFile();
+
+        // Adicionar a nova entrada
+        existingEntries.add(entry);
+
+        // Ordenar as entradas
+        Collections.sort(existingEntries);
+
+        // Manter apenas os 10 melhores scores
+        if (existingEntries.size() > 10) {
+            existingEntries = existingEntries.subList(0, 10);
+        }
+
+        // Salvar a leaderboard atualizada no arquivo
+        saveLeaderboardToFile(existingEntries);
+    }
+
+
+
+    private List<LeaderBoardEntry> loadLeaderboardFromFile() {
+        List<LeaderBoardEntry> entries = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(leaderboardFilePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] parts = line.split(" ");
+                if (parts.length > 0) {
+                    int score = Integer.parseInt(parts[0]);
+                    entries.add(new LeaderBoardEntry(score));
+                }
+            }
+        } catch (IOException | NumberFormatException e) {
+            // Lidar com exceções (por exemplo, arquivo não encontrado, formato inválido)
+            e.printStackTrace();
+        }
+        return entries;
+    }
+
+
+    private void saveLeaderboardToFile(List<LeaderBoardEntry> entries) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(leaderboardFilePath))) {
+            Collections.sort(entries); // Ordenar os scores em ordem decrescente
+
+            for (int i = 0; i < Math.min(entries.size(), 10); i++) {
+                writer.write(String.valueOf(entries.get(i).getScore()));
+                writer.newLine();
+            }
+        } catch (IOException e) {
+            // Lidar com exceções (por exemplo, impossibilidade de escrever no arquivo)
+            e.printStackTrace();
+        }
+    }
+
 }

@@ -15,12 +15,15 @@ public class GameMenu {
         return isGamestarted;
     }
 
+    LeaderBoard leaderBoard ;
+
     private boolean isGamestarted = false;
 
 
     public GameMenu(int width, int height) {
         this.width = width;
         this.height = height;
+        this.leaderBoard = new LeaderBoard();
     }
 
     public void NewGame() {
@@ -47,6 +50,8 @@ public class GameMenu {
         graphics.putString(new TerminalPosition(width - 40, height / 4 + 1), "Press Q to close the game");
 
         graphics.putString(new TerminalPosition(width - 45, height / 4 - 5), " ");
+
+        leaderBoard.draw(graphics);
 
     }
 }
