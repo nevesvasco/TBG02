@@ -36,13 +36,13 @@ public class Player extends Element {
         int y = position.getY();
         int radius = 3; // Raio do círculo
 
-        graphics.setForegroundColor(TextColor.Factory.fromString("#FFFF33")); // Cor amarela para o círculo
+        graphics.setForegroundColor(TextColor.Factory.fromString("#155e4c")); // Cor verde. para o círculo
 
-        // Desenha uma aproximação de círculo usando asteriscos
+        // Desenho de círculo usando asteriscos
         for (int i = -radius; i <= radius; i++) {
             for (int j = -radius; j <= radius; j++) {
                 if (i * i + j * j <= radius * radius + 2) {
-                    screen.setCharacter(x + j, y + i, new TextCharacter('*', TextColor.ANSI.YELLOW, TextColor.ANSI.YELLOW));
+                    screen.setCharacter(x + j, y + i, new TextCharacter('*', TextColor.Factory.fromString("#155e4c"), TextColor.Factory.fromString("#155e4c")));
                 }
             }
         }

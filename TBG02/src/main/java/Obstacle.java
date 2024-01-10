@@ -26,7 +26,7 @@ public class Obstacle extends Element {
         int x = position.getX();
         int y = position.getY();
 
-        graphics.setForegroundColor(TextColor.Factory.fromString("#FF0000")); // Cor vermelha para a forma
+        graphics.setForegroundColor(TextColor.Factory.fromString("#172499")); // Cor vermelha para a forma
 
         switch (shape) {
             case 0: // Quadrado

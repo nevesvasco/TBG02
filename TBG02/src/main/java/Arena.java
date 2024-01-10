@@ -233,4 +233,11 @@ public class Arena {
         isRunning = running;
     }
 
+    public List<Obstacle> getObstacles() {
+        return obstacles;
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
 }
