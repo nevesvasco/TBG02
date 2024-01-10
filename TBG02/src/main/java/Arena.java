@@ -13,76 +13,25 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class Arena {
-    public void setGameOver(boolean gameOver) {
-        this.gameOver = gameOver;
-    }
+    //Variavéis :
 
     private boolean gameOver = false;
     private final String leaderboardFilePath = "./leaderboard.txt";
     public int width;
     public int height;
-
-    public double getPontuacao() {
-        return pontuacao;
-    }
-
     private Collision collision;
-    public void setPontuacao(double pontuacao) {
-        this.pontuacao = pontuacao;
-    }
-
     public double pontuacao = 0;
-
-
-
-    public void setRunning(boolean running) {
-        isRunning = running;
-    }
-
     private boolean isPaused = false;
-
-    public boolean isPaused() {
-        return isPaused;
-    }
-
-    public void setPaused(boolean paused) {
-        isPaused = paused;
-    }
-
     private boolean isRunning = true;
     private Graphics2D graphics;
     private int scrollPosition = 0;
-
-    public int getScrollPosition() {
-        return scrollPosition;
-    }
-
-    public void setScrollPosition(int scrollPosition) {
-        this.scrollPosition = scrollPosition;
-    }
-
-    public boolean isGameOver(){
-        return gameOver;
-    }
-    public Player getPlayer() {
-        return player;
-    }
-
-    public void setPlayer(Player player) {
-        this.player = player;
-    }
-
     Player player;
-
-    public List<Wall> getWalls() {
-        return walls;
-    }
-
     private List<Wall> walls = new ArrayList<Wall>();
     private List<Obstacle> obstacles ;
     private Random random;
     private final ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
 
+    //Metodos
     public Arena(int width, int height) {
         player = new Player(90,45,6,9, Color.black);
         this.width = width;
@@ -257,6 +206,50 @@ public class Arena {
             // Lidar com exceções (por exemplo, impossibilidade de escrever no arquivo)
             e.printStackTrace();
         }
+    }
+
+    //GETTERS E SETTERS
+    public void setGameOver(boolean gameOver) {
+        this.gameOver = gameOver;
+    }
+    public List<Wall> getWalls() {
+        return walls;
+    }
+    public boolean isPaused() {
+        return isPaused;
+    }
+
+    public void setPaused(boolean paused) {
+        isPaused = paused;
+    }
+    public int getScrollPosition() {
+        return scrollPosition;
+    }
+
+    public void setScrollPosition(int scrollPosition) {
+        this.scrollPosition = scrollPosition;
+    }
+
+    public boolean isGameOver(){
+        return gameOver;
+    }
+    public Player getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+    public double getPontuacao() {
+        return pontuacao;
+
+    }
+    public void setPontuacao(double pontuacao) {
+        this.pontuacao = pontuacao;
+    }
+
+    public void setRunning(boolean running) {
+        isRunning = running;
     }
 
 }
