@@ -14,7 +14,6 @@ import java.util.concurrent.TimeUnit;
 
 public class Arena {
     //Variavéis :
-
     private boolean gameOver = false;
     private final String leaderboardFilePath = "./leaderboard.txt";
     public int width;
@@ -24,7 +23,6 @@ public class Arena {
     private boolean isPaused = false;
     private boolean isRunning = true;
     private Graphics2D graphics;
-    private int scrollPosition = 0;
     Player player;
     private List<Wall> walls = new ArrayList<Wall>();
     private List<Obstacle> obstacles ;
@@ -222,28 +220,11 @@ public class Arena {
     public void setPaused(boolean paused) {
         isPaused = paused;
     }
-    public int getScrollPosition() {
-        return scrollPosition;
-    }
-
-    public void setScrollPosition(int scrollPosition) {
-        this.scrollPosition = scrollPosition;
-    }
 
     public boolean isGameOver(){
         return gameOver;
     }
-    public Player getPlayer() {
-        return player;
-    }
 
-    public void setPlayer(Player player) {
-        this.player = player;
-    }
-    public double getPontuacao() {
-        return pontuacao;
-
-    }
     public void setPontuacao(double pontuacao) {
         this.pontuacao = pontuacao;
     }
