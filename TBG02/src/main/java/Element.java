@@ -1,6 +1,8 @@
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;
 
+import java.io.IOException;
+
 public abstract class Element {
     protected Position position;
     protected boolean isDead = false;
@@ -16,7 +18,7 @@ public abstract class Element {
         this.position = position;
     }
 
-    public abstract void draw(TextGraphics graphics, Screen screen);
+    public abstract void draw(TextGraphics graphics, Screen screen) throws IOException;
 
     public abstract void gameOver();
 }

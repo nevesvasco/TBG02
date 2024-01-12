@@ -9,6 +9,8 @@ import com.googlecode.lanterna.terminal.Terminal;
 import java.io.IOException;
 
 public class Game {
+
+    private PlaySound sound;
     Terminal terminal;
 
     GameMenu menu;
@@ -33,6 +35,7 @@ public class Game {
         this.pause = new PauseMenu(120,90);
         this.menu = new GameMenu (120,90);
         this.gameOver = new GameOverMenu(120, 90);
+        this.sound = new PlaySound();
     }
 
     private void draw() throws IOException {
@@ -91,6 +94,7 @@ public class Game {
             } else if (key.getKeyType() == KeyType.Character && key.getCharacter() == 'r') {
                 restartGame();
             } else if (key.getKeyType() == KeyType.Enter) {
+
                 menu.NewGame();
             }
         }
@@ -111,5 +115,6 @@ public class Game {
         arena.setPaused(false);
         arena = new Arena(120, 90);
         arena.setPontuacao(0);
+        sound.playSound("platforming.wav");
     }
 }

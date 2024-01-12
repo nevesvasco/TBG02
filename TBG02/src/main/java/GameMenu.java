@@ -8,6 +8,7 @@ import java.io.IOException;
 
 public class GameMenu {
 
+    private PlaySound sound;
     public int width;
     public int height;
 
@@ -24,11 +25,11 @@ public class GameMenu {
         this.width = width;
         this.height = height;
         this.leaderBoard = new LeaderBoard();
+        this.sound = new PlaySound();
     }
 
     public void NewGame() {
-        isGamestarted = true;
-    }
+        isGamestarted = true;   sound.playSound("platforming.wav");}
 
     public void CloseGame(Screen screen) throws IOException {
         screen.close();

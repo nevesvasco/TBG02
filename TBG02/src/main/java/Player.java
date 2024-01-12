@@ -6,9 +6,10 @@ import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.Screen;
 
 import java.awt.*;
-import java.awt.event.KeyEvent;
 
 public class Player extends Element {
+
+    private PlaySound sound;
     private int width, height;
     private Color color;
 
@@ -29,6 +30,7 @@ public class Player extends Element {
         this.height = height;
         this.color = color;
         this.initialY = y; // Definir a posição inicial Y do jogador
+        this.sound = new PlaySound();
     }
 
     public void draw(TextGraphics graphics, Screen screen) {
@@ -67,6 +69,7 @@ public class Player extends Element {
             }
         }
         if (isJumping) {
+            sound.playSound("Mario-jump-sound.wav");
             if (position.getY() > 45 - 10) {
                 position.setY(position.getY() - 10); // Simula o pulo movendo para cima
             } else {
