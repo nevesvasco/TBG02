@@ -3,11 +3,18 @@ import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.Screen;
 
+import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 
+import static java.awt.SystemColor.menu;
+
 public class GameMenu {
 
+
+
+    private boolean menustarted =  true;
+    private boolean nostalgia = true;
     private PlaySound sound;
     public int width;
     public int height;
@@ -16,7 +23,7 @@ public class GameMenu {
         return isGamestarted;
     }
 
-    LeaderBoard leaderBoard ;
+    LeaderBoard leaderBoard;
 
     private boolean isGamestarted = false;
 
@@ -26,10 +33,22 @@ public class GameMenu {
         this.height = height;
         this.leaderBoard = new LeaderBoard();
         this.sound = new PlaySound();
+        sound.playSound("nostalgia.wav");
     }
 
     public void NewGame() {
-        isGamestarted = true;   sound.playSound("platforming.wav");}
+        isGamestarted = true;
+        if (sound.getClip() != null) {
+            sound.stopSound();
+            if (nostalgia) {
+                sound.playSound("platforming.wav");
+                nostalgia = false;
+            }
+        } else {
+            sound.playSound("platforming.wav");
+        }
+    }
+
 
     public void CloseGame(Screen screen) throws IOException {
         screen.close();
@@ -54,6 +73,32 @@ public class GameMenu {
 
         leaderBoard.draw(graphics);
 
+    }
+
+    public void processKey(com.googlecode.lanterna.input.KeyStroke key, Game game) throws IOException {
+        if (key.getKeyType() == KeyType.Character && key.getCharacter() == 'r') {
+            menustarted = false;
+            game.restartGame();
+        } else if (key.getKeyType() == KeyType.Enter) {
+            menustarted = false;
+            NewGame();
+
+        }
+    }
+
+    public PlaySound getSound() {
+        return sound;
+    }
+
+    public void setSound(PlaySound sound) {
+        this.sound = sound;
+    }
+    public boolean isMenustarted() {
+        return menustarted;
+    }
+
+    public void setMenustarted(boolean menustarted) {
+        this.menustarted = menustarted;
     }
 }
 

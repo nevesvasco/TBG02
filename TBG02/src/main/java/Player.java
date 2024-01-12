@@ -9,6 +9,9 @@ import java.awt.*;
 
 public class Player extends Element {
 
+
+
+    private boolean muted = false;
     private PlaySound sound;
     private int width, height;
     private Color color;
@@ -53,6 +56,9 @@ public class Player extends Element {
     @Override
     public void gameOver() {
         isDead = true;
+        if (!muted) {
+            sound.playSound("game over.wav");
+        }
     }
 
     public void handleKeyPress(KeyStroke key, Arena arena) {
@@ -69,7 +75,9 @@ public class Player extends Element {
             }
         }
         if (isJumping) {
-            sound.playSound("Mario-jump-sound.wav");
+            if (!muted) {
+                sound.playSound("Mario-jump-sound.wav");
+            }
             if (position.getY() > 45 - 10) {
                 position.setY(position.getY() - 10); // Simula o pulo movendo para cima
             } else {
@@ -87,5 +95,11 @@ public class Player extends Element {
         }
         return false;
     }
+    public boolean isMuted() {
+        return muted;
+    }
 
+    public void setMuted(boolean muted) {
+        this.muted = muted;
+    }
 }

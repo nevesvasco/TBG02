@@ -25,26 +25,28 @@ public class Arena {
     private Graphics2D graphics;
     Player player;
     private List<Wall> walls = new ArrayList<Wall>();
-    private List<Obstacle> obstacles ;
+    private List<Obstacle> obstacles;
     private Random random;
     private final ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
 
     //Metodos
     public Arena(int width, int height) {
-        player = new Player(90,45,6,9, Color.black);
+        player = new Player(90, 45, 6, 9, Color.black);
         this.width = width;
         this.height = height;
         this.walls = createWalls();
-        this.obstacles =  new ArrayList<Obstacle>() ;
+        this.obstacles = new ArrayList<Obstacle>();
         this.random = new Random();
-        this.collision = new Collision(0,0);
+        this.collision = new Collision(0, 0);
     }
 
-    public void processKey(KeyStroke key, Screen screen) throws IOException {
-        if(gameOver){
+    public void processKey(KeyStroke key, Screen screen, PauseMenu pause, Game game) throws IOException {
+        if (gameOver) {
             if (key.getKeyType() == KeyType.Character && key.getCharacter() == 'r') {
                 resetGame();
-            }else{screen.close();}
+            } else {
+                screen.close();
+            }
         }
         if (key.getKeyType() == KeyType.EOF) {
             isRunning = false;
@@ -56,12 +58,13 @@ public class Arena {
             screen.close();
         }
         if (key.getKeyType() == KeyType.Character && key.getCharacter() == ' ') {
-            if (!player.isJumping()){
+            if (!player.isJumping()) {
                 player.handleKeyPress(key, this);
             }
         }
-
-
+        if (!isPaused && key.getKeyType() == KeyType.Character && key.getCharacter() == 'p') {
+            isPaused = true;
+        }
     }
 
     public void addWall(Wall wall) {
@@ -95,36 +98,38 @@ public class Arena {
         }
     }
 
-    public void draw(TextGraphics textGraphics, Screen screen) {
+    public void draw(TextGraphics textGraphics, Screen screen) throws IOException {
         screen.clear();
 
         textGraphics = screen.newTextGraphics();
         textGraphics.setBackgroundColor(TextColor.Factory.fromString("#F9E76D"));
-        textGraphics.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(width * 16, height *9),' ');
+        textGraphics.fillRectangle(new TerminalPosition(0, 0), new TerminalSize(width * 16, height * 9), ' ');
         textGraphics.setForegroundColor(TextColor.ANSI.BLACK);
-        textGraphics.putString(new TerminalPosition(width + 55, height / 8 - 8), "Pontos: "+ (int)pontuacao);
+        textGraphics.putString(new TerminalPosition(width + 55, height / 8 - 8), "Pontos: " + (int) pontuacao);
 
-        for (Wall wall : walls){
+        for (Wall wall : walls) {
             wall.draw(textGraphics, screen);
         }
-        if(obstacles.isEmpty()){
+        if (obstacles.isEmpty()) {
             executorService.schedule(() -> {
-                while(obstacles.size() < 4){createObstacles();}
+                while (obstacles.size() < 4) {
+                    createObstacles();
+                }
             }, 5, TimeUnit.MILLISECONDS);
         }
         for (Obstacle obstacle : obstacles) {
-            obstacle.draw(textGraphics,screen);
+            obstacle.draw(textGraphics, screen);
         }
         player.draw(screen.newTextGraphics(), screen);
         updateObstacles();
-        if (player.isJumping()){
+        if (player.isJumping()) {
             executorService.schedule(() -> {
                 player.setJumping(false);
                 player.setPosition(new Position(90, 45));
             }, 400, TimeUnit.MILLISECONDS);
         }
         executorService.schedule(() -> {
-               pontuacao += 1;
+            pontuacao += 1;
         }, 5, TimeUnit.MILLISECONDS);
         if (!gameOver) {
             if (collision.collidesWith(obstacles, player)) {
@@ -134,6 +139,7 @@ public class Arena {
 
         }
     }
+
     private List<Wall> createWalls() {
         List<Wall> walls = new ArrayList<>();
         for (int c = 0; c < width; c++) {
@@ -146,6 +152,7 @@ public class Arena {
         }
         return walls;
     }
+
     public boolean isRunning() {
         return isRunning;
     }
@@ -170,7 +177,6 @@ public class Arena {
         // Salvar a leaderboard atualizada no arquivo
         saveLeaderboardToFile(existingEntries);
     }
-
 
 
     private List<LeaderBoardEntry> loadLeaderboardFromFile() {
@@ -210,9 +216,11 @@ public class Arena {
     public void setGameOver(boolean gameOver) {
         this.gameOver = gameOver;
     }
+
     public List<Wall> getWalls() {
         return walls;
     }
+
     public boolean isPaused() {
         return isPaused;
     }
@@ -221,7 +229,7 @@ public class Arena {
         isPaused = paused;
     }
 
-    public boolean isGameOver(){
+    public boolean isGameOver() {
         return gameOver;
     }
 
