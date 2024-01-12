@@ -14,6 +14,10 @@ import java.util.concurrent.TimeUnit;
 
 public class Arena {
     //Variavéis :
+    private double speedMultiplier = 1.0;
+    private long speedMultiplierEndTime = 0L;
+    private static final long SPEED_UP_DURATION = 2000;  // 2 seconds in milliseconds
+
     private boolean gameOver = false;
     private final String leaderboardFilePath = "./leaderboard.txt";
     public int width;
@@ -64,6 +68,10 @@ public class Arena {
         }
         if (!isPaused && key.getKeyType() == KeyType.Character && key.getCharacter() == 'p') {
             isPaused = true;
+        }
+        if (key.getKeyType() == KeyType.Character && key.getCharacter() == 'v') {
+            speedMultiplier = 2.0;
+            speedMultiplierEndTime = System.currentTimeMillis() + SPEED_UP_DURATION;
         }
     }
 
@@ -118,6 +126,14 @@ public class Arena {
             }, 5, TimeUnit.MILLISECONDS);
         }
         for (Obstacle obstacle : obstacles) {
+            obstacle.draw(textGraphics, screen);
+        }
+        for (Obstacle obstacle : obstacles) {
+            if (System.currentTimeMillis() < speedMultiplierEndTime) {
+                obstacle.setSpeedMultiplier(speedMultiplier);
+            } else {
+                obstacle.setSpeedMultiplier(1.0);  // Reset to normal speed
+            }
             obstacle.draw(textGraphics, screen);
         }
         player.draw(screen.newTextGraphics(), screen);

@@ -8,7 +8,9 @@ import java.util.Random;
 
 public class Obstacle extends Element {
 
+    private double speedMultiplier;
 
+    private int speed = 1;
     public Obstacle(int x, int y) {
         super(x,y);
     }
@@ -17,8 +19,10 @@ public class Obstacle extends Element {
         position.setY(position.getY()+1);
     }
     public void moveLeft() {
-        position.setX(position.getX() - 1); // Move o obstáculo para a esquerda subtraindo 1 da posição X
+        int newX = position.getX() - (int) (speed * speedMultiplier);
+        position = new Position(newX, position.getY());
     }
+
     public void draw(TextGraphics graphics, Screen screen) {
         Random random = new Random();
         int shape = random.nextInt(3); // Gerar um número aleatório para escolher a forma geométrica
@@ -72,5 +76,8 @@ public class Obstacle extends Element {
                 }
             }
         }
+    }
+    public void setSpeedMultiplier(double speedMultiplier) {
+        this.speedMultiplier = speedMultiplier;
     }
 }
