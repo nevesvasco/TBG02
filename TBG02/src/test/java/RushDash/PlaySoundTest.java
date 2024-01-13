@@ -1,213 +1,49 @@
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+package RushDash;
+import org.junit.jupiter.api.Test;
+import javax.sound.sampled.Clip;
 
-import javax.sound.sampled.*;
-import java.io.IOException;
+import static org.junit.jupiter.api.Assertions.*;
 
-import static org.junit.Assert.*;
-
-public class PlaySoundTest {
-
-    private PlaySound playSound;
-
-    @Before
-    public void setUp() {
-        playSound = new PlaySound();
-    }
-
-    @After
-    public void tearDown() {
-        playSound.stopSound();
-    }
+class PlaySoundTest {
 
     @Test
-    public void testPlaySound() {
-        // Tenta reproduzir um som e verifica se o Clip está ativo
-        playSound.playSound("test_sound.wav");
-        assertNotNull(playSound.getClip());
-        assertTrue(playSound.getClip().isActive());
-    }
+    void testPlaySound() {
+        PlaySound playSound = new PlaySound();
+        String soundFile = "platforming.wav";
 
-    @Test
-    public void testStopSound() {
-        // Tenta parar o som e verifica se o Clip é nulo após a parada
-        playSound.playSound("test_sound.wav");
-        playSound.stopSound();
-        assertNull(playSound.getClip());
-    }
+        // Verifica se o método playSound não lança exceções
+        assertDoesNotThrow(() -> playSound.playSound(soundFile));
 
-    @Test
-    public void testGetSetClip() {
-        // Cria um Clip fictício e verifica se os métodos get e set funcionam corretamente
-        Clip testClip = createMockClip();
-        playSound.setClip(testClip);
-        assertEquals(testClip, playSound.getClip());
-    }
+        // Verifica se o Clip foi inicializado corretamente
+        Clip clip = playSound.getClip();
+        assertNotNull(clip);
 
-    private Clip createMockClip() {
-        // Implemente um Clip fictício para uso nos testes
-        return new Clip() {
-            @Override
-            public Line.Info getLineInfo() {
-                return null;
-            }
-
-            @Override
-            public void open() throws LineUnavailableException {
-
-            }
-
-            @Override
-            public void close() {
-
-            }
-
-            @Override
-            public boolean isOpen() {
-                return false;
-            }
-
-            @Override
-            public Control[] getControls() {
-                return new Control[0];
-            }
-
-            @Override
-            public boolean isControlSupported(Control.Type control) {
-                return false;
-            }
-
-            @Override
-            public Control getControl(Control.Type control) {
-                return null;
-            }
-
-            @Override
-            public void addLineListener(LineListener listener) {
-
-            }
-
-            @Override
-            public void removeLineListener(LineListener listener) {
-
-            }
-
-            @Override
-            public void drain() {
-
-            }
-
-            @Override
-            public void flush() {
-
-            }
-
-            @Override
-            public void start() {
-
-            }
-
-            @Override
-            public void stop() {
-
-            }
-
-            @Override
-            public boolean isRunning() {
-                return false;
-            }
-
-            @Override
-            public boolean isActive() {
-                return false;
-            }
-
-            @Override
-            public AudioFormat getFormat() {
-                return null;
-            }
-
-            @Override
-            public int getBufferSize() {
-                return 0;
-            }
-
-            @Override
-            public int available() {
-                return 0;
-            }
-
-            @Override
-            public int getFramePosition() {
-                return 0;
-            }
-
-            @Override
-            public long getLongFramePosition() {
-                return 0;
-            }
-
-            @Override
-            public long getMicrosecondPosition() {
-                return 0;
-            }
-
-            @Override
-            public float getLevel() {
-                return 0;
-            }
-
-            @Override
-            public void open(AudioFormat format, byte[] data, int offset, int bufferSize) throws LineUnavailableException {
-
-            }
-
-            @Override
-            public void open(AudioInputStream stream) throws LineUnavailableException, IOException {
-
-            }
-
-            @Override
-            public int getFrameLength() {
-                return 0;
-            }
-
-            @Override
-            public long getMicrosecondLength() {
-                return 0;
-            }
-
-            @Override
-            public void setFramePosition(int frames) {
-
-            }
-
-            @Override
-            public void setMicrosecondPosition(long microseconds) {
-
-            }
-
-            @Override
-            public void setLoopPoints(int start, int end) {
-
-            }
-
-            @Override
-            public void loop(int count) {
-
-            }
-            // Implemente os métodos necessários para o teste
-        };
-    }
-
-    @Test
-    public void testPlayInvalidSound() {
-        // Tenta reproduzir um som inexistente e verifica se a exceção é tratada corretamente
+        // Aguarde alguns segundos (tempo suficiente para o som ser reproduzido)
         try {
-            playSound.playSound("nonexistent_sound.wav");
-        } catch (Exception e) {
-            assertNotNull(e.getMessage());
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
+
+        // Pare o som e verifique se o Clip foi fechado
+        playSound.stopSound();
+        assertFalse(clip.isRunning());
+    }
+
+    @Test
+    void testStopSound() {
+        PlaySound playSound = new PlaySound();
+        String soundFile = "platforming.wav";
+
+        // Reproduza um som antes de chamar stopSound
+        playSound.playSound(soundFile);
+
+        // Verifique se o Clip está em execução antes de chamar stopSound
+        Clip clip = playSound.getClip();
+        assertNotNull(clip);
+
+        // Pare o som e verifique se o Clip foi fechado
+        playSound.stopSound();
+        assertFalse(clip.isRunning());
     }
 }

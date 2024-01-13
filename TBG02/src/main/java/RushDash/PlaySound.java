@@ -11,7 +11,7 @@ public class PlaySound {
     private Clip clip;
 
     void playSound(String soundFile) {
-        File f = new File("./sounds/" + soundFile);
+        File f = new File("./src/main/resources/" + soundFile);
         try {
             AudioInputStream audioIn = AudioSystem.getAudioInputStream(f.toURI().toURL());
 
