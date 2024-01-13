@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.security.Key;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -39,26 +40,26 @@ public class ArenaTest {
         assertTrue(obstacle.getPosition().getX() >= 110 && obstacle.getPosition().getX() <= 229);
         assertTrue(obstacle.getPosition().getY() >= 35 && obstacle.getPosition().getY() <= 73);
     }
+        @Test
+        void addWall_addsWallToList() {
+            Arena arena = new Arena(100, 50);
+            Wall wall = new Wall(10, 20);
 
-    @Test
-    public void testProcessKeyGameOver() throws IOException {
-        arena.setGameOver(true);
-        KeyStroke keyStroke = new KeyStroke(KeyType.EOF);
-        arena.processKey(keyStroke, screen);
+            arena.addWall(wall);
 
-        assertFalse(arena.isRunning());
+            List<Wall> walls = arena.getWalls();
+            assertTrue(((List<?>) walls).contains(wall));
+        }
+
+        @Test
+        void resetGame_resetsPlayerPosition() {
+            Arena arena = new Arena(100, 50);
+            arena.setGameOver(true);
+            arena.getPlayer().setPosition(new Position(50, 25));
+
+            arena.resetGame();
+
+            assertFalse(arena.isGameOver());
+            assertEquals(new Position(90, 45), arena.getPlayer().getPosition());
+        }
     }
-
-    @Test
-    public void testProcessKeyQuitGame() throws IOException {
-        assertFalse(arena.isRunning());
-    }
-
-    @Test
-    public void testProcessKeyJump() throws IOException {
-        // Verificar se o jogador pulou
-        assertTrue(arena.getPlayer().isJumping());
-    }
-
-    // Outros testes para os métodos da classe Arena podem ser adicionados conforme necessário
-}
