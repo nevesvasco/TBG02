@@ -1,4 +1,7 @@
 package RushDash;
+import com.googlecode.lanterna.input.KeyStroke;
+import com.googlecode.lanterna.input.KeyType;
+import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
 import java.awt.*;
@@ -58,6 +61,33 @@ class PlayerTest {
         assertEquals(5, player.getPosition().getY());
 
         assertEquals(5, player.getPosition().getY());
+    }
+
+    @Test
+    public void testGameOver() {
+        Player player = new Player(0, 0, 10, 10, java.awt.Color.RED);
+        player.gameOver();
+    }
+
+    @Test
+    public void testCollidesWithElement() {
+        Player player = new Player(0, 0, 10, 10, java.awt.Color.RED);
+        player.collidesWithElement(player);
+    }
+
+    @Test
+    public void testIsMuted() {
+        Player player = new Player(0, 0, 10, 10, java.awt.Color.RED);
+
+        Assert.assertFalse(player.isMuted());
+    }
+
+    @Test
+    public void testSetMuted() {
+        Player player = new Player(0, 0, 10, 10, java.awt.Color.RED);
+        player.setMuted(true);
+
+        Assert.assertTrue(player.isMuted());
     }
 }
 

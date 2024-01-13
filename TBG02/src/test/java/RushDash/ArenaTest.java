@@ -1,12 +1,8 @@
 package RushDash;
 import com.googlecode.lanterna.graphics.TextGraphics;
-import com.googlecode.lanterna.input.KeyStroke;
-import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.Screen;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import java.io.IOException;
-import java.security.Key;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
