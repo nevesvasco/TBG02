@@ -1,3 +1,5 @@
+package RushDash;
+
 import com.googlecode.lanterna.*;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
@@ -13,8 +15,11 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class Arena {
+
+
     //Variavéis :
     private double speedMultiplier = 1.0;
+
     private long speedMultiplierEndTime = 0L;
     private static final long SPEED_UP_DURATION = 2000;  // 2 seconds in milliseconds
 
@@ -263,5 +268,12 @@ public class Arena {
 
     public Player getPlayer() {
         return player;
+    }
+
+    public double getSpeedMultiplier() {
+        return speedMultiplier;
+    }
+    public long getSpeedMultiplierEndTime() {
+        return speedMultiplierEndTime;
     }
 }

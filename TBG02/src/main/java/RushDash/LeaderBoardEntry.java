@@ -1,3 +1,5 @@
+package RushDash;
+
 public class LeaderBoardEntry implements Comparable<LeaderBoardEntry>{
     private final int score;
 

@@ -1,10 +1,11 @@
+package RushDash;
+
+import RushDash.Arena;
 import com.googlecode.lanterna.*;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyType;
-import com.googlecode.lanterna.screen.Screen;
 
 import java.io.IOException;
-import java.sql.SQLOutput;
 
 public class PauseMenu {
 

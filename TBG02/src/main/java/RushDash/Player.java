@@ -1,3 +1,8 @@
+package RushDash;
+
+import RushDash.Arena;
+import RushDash.Element;
+import RushDash.PlaySound;
 import com.googlecode.lanterna.TextCharacter;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;

@@ -1,3 +1,5 @@
+package RushDash;
+
 import com.googlecode.lanterna.*;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyType;
@@ -40,7 +42,7 @@ public class GameOverMenu {
 
         graphics.fillRectangle(new TerminalPosition(width - 45, height / 4 - 5), new TerminalSize(40, 10), ' ');
 
-        graphics.putString(new TerminalPosition(width - 30, height / 4 - 4), "Game Over");
+        graphics.putString(new TerminalPosition(width - 30, height / 4 - 4), "RushDash.Game Over");
 
         graphics.putString(new TerminalPosition(width - 40, height / 4 - 1), "Press Enter to start a new game");
 

@@ -1,3 +1,5 @@
+package RushDash;
+
 import javax.sound.sampled.Clip;
 import java.io.File;
 import javax.sound.sampled.AudioInputStream;

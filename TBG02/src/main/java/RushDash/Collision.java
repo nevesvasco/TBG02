@@ -1,3 +1,5 @@
+package RushDash;
+
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;
 

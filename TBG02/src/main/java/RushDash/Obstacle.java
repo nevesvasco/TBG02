@@ -1,4 +1,6 @@
-import com.googlecode.lanterna.SGR;
+package RushDash;
+
+import RushDash.Element;
 import com.googlecode.lanterna.TextCharacter;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;

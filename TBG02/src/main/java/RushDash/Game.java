@@ -1,5 +1,10 @@
+package RushDash;
+
+import RushDash.Arena;
+import RushDash.GameMenu;
+import RushDash.GameOverMenu;
+import RushDash.PauseMenu;
 import com.googlecode.lanterna.TerminalSize;
-import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
@@ -12,8 +17,10 @@ public class Game {
 
 
     private boolean ismuted = false;
-    Terminal terminal;
 
+
+    private boolean isResetGameCalled = false;
+    Terminal terminal;
 
     GameMenu menu;
     PauseMenu pause;
@@ -119,6 +126,7 @@ public class Game {
         arena.setPaused(false);
         arena = new Arena(120, 90);
         arena.setPontuacao(0);
+        isResetGameCalled = true;
         menu.getSound().playSound("platforming.wav");
         mute();
     }
@@ -133,5 +141,9 @@ public class Game {
 
     public GameMenu getMenu() {
         return menu;
+    }
+
+    public boolean isResetGameCalled() {
+        return isResetGameCalled;
     }
 }
