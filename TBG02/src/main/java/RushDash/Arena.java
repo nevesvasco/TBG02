@@ -217,7 +217,6 @@ public class Arena {
                 }
             }
         } catch (IOException | NumberFormatException e) {
-            // Lidar com exceções (por exemplo, arquivo não encontrado, formato inválido)
             e.printStackTrace();
         }
         return entries;
@@ -233,7 +232,6 @@ public class Arena {
                 writer.newLine();
             }
         } catch (IOException e) {
-            // Lidar com exceções (por exemplo, impossibilidade de escrever no arquivo)
             e.printStackTrace();
         }
     }
