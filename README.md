@@ -17,9 +17,38 @@ Escape - Menu
 
 V - Boost
 
-##Docs##
-![Opening Menu](https://github.com/nevesvasco/TBG02/assets/131387962/16495469-5874-4e3e-aa24-a30153ec0f14)
-![Pause menu](https://github.com/nevesvasco/TBG02/assets/131387962/27a68850-3cbb-4154-8972-db49355ef277)
-![Top score menu](https://github.com/nevesvasco/TBG02/assets/131387962/1b92b08c-be84-4f5c-8dd8-d06dbccda2f1)
-![mock_ecra_jogo](https://github.com/nevesvasco/TBG02/assets/131387962/d44a6423-8432-427f-8a1c-d0ed87e87e87)
-![CONTROLS](https://github.com/nevesvasco/TBG02/assets/131387962/a3b39d4b-276f-4858-b74c-eb9a1ed8912c)
+## Docs
+![Opening Menu and Leaderboard](https://github.com/nevesvasco/TBG02/blob/main/Docs/Main%20Menu.png)
+![Pause menu](https://github.com/nevesvasco/TBG02/blob/main/Docs/Ecr%C3%A3%20de%20Pausa.png)
+![mock_ecra_jogo](https://github.com/nevesvasco/TBG02/blob/main/Docs/Ecr%C3%A3%20de%20jogo.png)
+![Game Over Menu](https://github.com/nevesvasco/TBG02/blob/main/Docs/Game%20Over.png)
+
+## Funções implementadas
+O jogo vai ser do género plataforma 2D, em que o personagem vai ser uma figura geométrica em que anda para a frente sozinho ao ritmo da música em 8 bit e o jogador só usa 2 teclas. Uma para saltar, e outra para usar um boost que apanha no nível. 
+Há medida que a figura vai avançando, vai ganhando pontos num score que aparece na parte superior do ecrã.
+O jogo tem um nível infinito que só termina quando o jogador toca num obstáculo, sendo que o nível de dificuldade é grande desde o início do jogo.
+
+## Funções não implementadas
+O jogo vai estar dividido por níveis, e há medida que se vai passando os níveis, mais difícil o jogo se torna.
+O nível também vai-se tornando mais difícil enquanto o personagem mais avança. Vai aparecendo cada vez mais obstáculos e o ritmo da música vai ficando mais rápido.
+
+## Consequências
+O jogador quando toca num obstáculo perde o jogo. Aparece de seguida o ecrã de Game Over, podendo voltar a reiniciar a partida ou fechar a sessão. Se a pontuação do jogador estiver entre os 10 melhores, essa pontuação aparece no Leaderboard no Main Menu.
+O jogador pode também carregar na tecla V, para ter um boost de aceleração de 2 segundos, ganhando assim mais pontos.
+
+## Testing
+
+Fizemos ao todo, 7 classes de teste para o projeto, ficando com 81% de coverage total.
+Os testes que fizemos foram ArenaTest, ObstacleTest, PauseMenuTest, PlayerTest, PlaySoundTest, PositionTest e WallTest.
+
+![Percentagem de coverage do jogo](https://github.com/nevesvasco/TBG02/blob/main/Docs/Percentagem%20de%20Coverage.png)
+
+## Self-Evaluation
+
+O trabalho foi praticamente todo executado em conjunto, mas em cada sessão que nos reuni-mos fazemos num PC diferente para que os três pudessem ter commits suficientes no Github.
+
+Betânia Dos Santos: 33%
+
+Daniel Nunes: 33%
+
+Vasco Neves: 33%
