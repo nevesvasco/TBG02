@@ -12,7 +12,7 @@ public class PauseMenuTest {
     @Test
     public void testProcessKeyRestart() throws IOException {
         PauseMenu pauseMenu = new PauseMenu(80, 24);
-        KeyStroke key = new KeyStroke(KeyType.Character, 'r');
+        KeyStroke key = new KeyStroke('r', false, false);
         Game game = new Game();
         Arena arena = new Arena(120, 90);
 
@@ -26,7 +26,7 @@ public class PauseMenuTest {
     @Test
     public void testProcessKeyMute() throws IOException {
         PauseMenu pauseMenu = new PauseMenu(80, 24);
-        KeyStroke key = new KeyStroke(KeyType.Character, 'm');
+        KeyStroke key = new KeyStroke('m', false, false);
         Game game = new Game();
         Arena arena = new Arena(120, 90);
 
@@ -39,7 +39,7 @@ public class PauseMenuTest {
     @Test
     public void testProcessKeyContinue() throws IOException {
         PauseMenu pauseMenu = new PauseMenu(80, 24);
-        KeyStroke key = new KeyStroke(KeyType.Character, 'p');
+        KeyStroke key = new KeyStroke('p', false, false);
         Game game = new Game();
         Arena arena = new Arena(120,90);
 

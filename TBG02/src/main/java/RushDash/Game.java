@@ -10,7 +10,8 @@ import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
-
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 
 public class Game {
@@ -33,7 +34,6 @@ public class Game {
         terminalSize = new TerminalSize(190, 50);
         DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory().setInitialTerminalSize(terminalSize);
         terminal = terminalFactory.createTerminal();
-
         screen = new TerminalScreen(terminal);
         screen.setCursorPosition(null);
         screen.startScreen();
@@ -46,7 +46,14 @@ public class Game {
     }
 
     private void draw() throws IOException {
-
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            arena.setRunning(false);
+            try {
+                screen.close();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+        }));
         if (menu.isGamestarted()) {
             if (!arena.isRunning()) {
                 System.exit(0);

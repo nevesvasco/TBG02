@@ -159,6 +159,11 @@ public class Arena {
             }
 
         }
+        if (screen.getTerminalSize().getRows() <= 1 ){
+            isRunning = false;
+           screen.close();
+           System.exit(0);
+        }
     }
 
     private List<Wall> createWalls() {

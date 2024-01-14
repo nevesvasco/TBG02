@@ -10,7 +10,7 @@ import java.util.Random;
 
 public class Obstacle extends Element {
 
-    private double speedMultiplier;
+    private double speedMultiplier = 1;
 
     private int speed = 1;
     public Obstacle(int x, int y) {

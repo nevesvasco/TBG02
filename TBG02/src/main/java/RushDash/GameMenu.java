@@ -79,12 +79,19 @@ public class GameMenu {
 
     public void processKey(com.googlecode.lanterna.input.KeyStroke key, Game game) throws IOException {
         if (key.getKeyType() == KeyType.Character && key.getCharacter() == 'r') {
+            System.out.println(key);
             menustarted = false;
             game.restartGame();
         } else if (key.getKeyType() == KeyType.Enter) {
             menustarted = false;
+            System.out.println(key);
             NewGame();
 
+        }
+        else if (key.getKeyType() == KeyType.Character && key.getCharacter() == 'q') {
+            System.out.println(key);
+            menustarted = false;
+            System.exit(0);
         }
     }
 
