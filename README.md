@@ -17,7 +17,7 @@ Escape - Menu
 
 V - Boost
 
-##Docs##
+## Docs
 ![Opening Menu and Leaderboard](https://github.com/nevesvasco/TBG02/blob/main/Docs/Main%20Menu.png)
 ![Pause menu](https://github.com/nevesvasco/TBG02/blob/main/Docs/Ecr%C3%A3%20de%20Pausa.png)
 ![mock_ecra_jogo](https://github.com/nevesvasco/TBG02/blob/main/Docs/Ecr%C3%A3%20de%20jogo.png)
