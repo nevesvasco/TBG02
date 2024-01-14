@@ -48,5 +48,7 @@ Os testes que fizemos foram ArenaTest, ObstacleTest, PauseMenuTest, PlayerTest, 
 O trabalho foi praticamente todo executado em conjunto, mas em cada sessão que nos reuni-mos fazemos num PC diferente para que os três pudessem ter commits suficientes no Github.
 
 Betânia Dos Santos: 33%
+
 Daniel Nunes: 33%
+
 Vasco Neves: 33%
