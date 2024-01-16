@@ -32,6 +32,10 @@ O jogo tem um nível infinito que só termina quando o jogador toca num obstácu
 O jogo vai estar dividido por níveis, e há medida que se vai passando os níveis, mais difícil o jogo se torna.
 O nível também vai-se tornando mais difícil enquanto o personagem mais avança. Vai aparecendo cada vez mais obstáculos e o ritmo da música vai ficando mais rápido.
 
+## UML
+
+![UML Final das classes e métodos do jogo](https://github.com/nevesvasco/TBG02/blob/main/Docs/UML%20Final.png)
+
 ## Consequências
 O jogador quando toca num obstáculo perde o jogo. Aparece de seguida o ecrã de Game Over, podendo voltar a reiniciar a partida ou fechar a sessão. Se a pontuação do jogador estiver entre os 10 melhores, essa pontuação aparece no Leaderboard no Main Menu.
 O jogador pode também carregar na tecla V, para ter um boost de aceleração de 2 segundos, ganhando assim mais pontos.
